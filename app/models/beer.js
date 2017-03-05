@@ -5,6 +5,8 @@ import {belongsTo} from 'ember-data/relationships'
 
 
 export default Model.extend({
+  type : 'beer',
+
   name             : attr('string'),
   description      : attr('string'),
   website          : attr('string'),

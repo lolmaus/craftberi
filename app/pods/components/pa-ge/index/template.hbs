@@ -2,22 +2,27 @@
   Сегодня на кранах
 </h2>
 
-
-{{beer-table/tap
-  taps     = taps
-  class    = (concat componentCssClassName '-table _taps')
-  mode     = "tap"
-}}
+{{#if allDocumentsProxy.isFulfilled}}
+  {{beer-table/tap
+    taps     = taps
+    class    = (concat componentCssClassName '-table _taps')
+    mode     = "tap"
+  }}
+{{else}}
+  Загружаем...
+{{/if}}
 
 
 <h2 class = "{{componentCssClassName}}-header">
   Сегодня на бутылках
 </h2>
 
-{{beer-table/bottle
-  beers = (filter-by 'bottle' 'yes' beers)
-  class = (concat componentCssClassName '-table _bottles')
-  mode  = "tap"
-}}
-
-{{log 'bottles' (filter-by 'bottle' 'yes' beers)}}
+{{#if allDocumentsProxy.isFulfilled}}
+  {{beer-table/bottle
+    beers = (filter-by 'bottle' 'yes' beers)
+    class = (concat componentCssClassName '-table _bottles')
+    mode  = "tap"
+  }}
+{{else}}
+  Загружаем...
+{{/if}}

@@ -1,7 +1,13 @@
-import DS from 'ember-data'
+import Model from 'ember-data/model'
+import attr from 'ember-data/attr'
+import {hasMany} from 'ember-data/relationships'
 
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  location: DS.attr('string'),
-  website: DS.attr('string')
+export default Model.extend({
+  type : 'brewery',
+
+  name     : attr('string'),
+  location : attr('string'),
+  website  : attr('string'),
+
+  beers : hasMany('beer'),
 })
