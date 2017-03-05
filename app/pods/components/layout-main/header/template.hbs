@@ -1,0 +1,27 @@
+<div class = "{{componentCssClassName}}-container">
+  <img
+    class = "{{componentCssClassName}}-image"
+    src = "../favicon.png"
+  >
+
+  <div class = "{{componentCssClassName}}-text">
+    <h1 class = "{{componentCssClassName}}-title">
+      Крафтбери
+    </h1>
+
+    <h2 class = "{{componentCssClassName}}-subtitle">
+      авторское пиво
+    </h2>
+  </div>{{! text }}
+</div>{{! container }}
+
+<p>
+  my-header componentCssClassName {{componentCssClassName}}
+</p>
+
+
+
+{{log 'my-header' (hash
+        componentCssClassName = componentCssClassName
+        podNames = podNames
+)}}

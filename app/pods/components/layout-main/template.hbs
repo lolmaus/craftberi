@@ -1,0 +1,15 @@
+{{layout-main/header
+  class = (concat componentCssClassName '-header')
+}}
+
+
+{{yield}}
+
+<p>
+  layout-main componentCssClassName {{componentCssClassName}}
+</p>
+
+{{log 'layout-main' (hash
+        componentCssClassName = componentCssClassName
+        podNames = podNames
+)}}

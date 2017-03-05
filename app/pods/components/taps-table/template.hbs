@@ -1,0 +1,68 @@
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Стиль</th>
+      <th>Название</th>
+      <th>Пивоварня</th>
+      <th>IBU</th>
+      <th>ABV</th>
+      <th>OG</th>
+      <th>₽/🍺</th>
+      <th>₽/л</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each taps as |tap|}}
+      <tr>
+        <td>
+          {{tap.number}}
+        </td>
+
+        <td>
+          {{{tap.beer.style}}}
+        </td>
+
+        <td>
+          {{{tap.beer.name}}}
+        </td>
+
+        <td>
+          {{{tap.beer.brewery.name}}}
+        </td>
+
+        <td>
+          {{tap.beer.ibu}}
+        </td>
+
+        <td>
+          {{#if tap.beer.abv}}
+            {{tap.beer.abv}}°
+          {{/if}}
+        </td>
+
+        <td>
+          {{#if tap.beer.og}}
+            {{tap.beer.og}}%
+          {{/if}}
+        </td>
+
+        <td>
+          {{#if tap.beer.pricePint}}
+            {{tap.beer.pricePint}}₽
+          {{/if}}
+        </td>
+
+        <td>
+          {{#if tap.beer.priceLiter}}
+            {{tap.beer.priceLiter}}₽
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<p>
+  taps-table componentCssClassName {{componentCssClassName}}
+</p>
