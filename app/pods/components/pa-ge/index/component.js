@@ -15,9 +15,7 @@ export default Component.extend({
   prismic : service(),
 
   allDocumentsPromise : computed(function () {
-    return this
-      .get('prismic')
-      .findAllDocuments()
+    return this._fetch()
   }),
 
   allDocumentsProxy : computed('allDocumentsPromise', function () {
@@ -28,5 +26,17 @@ export default Component.extend({
   allDocuments : reads('allDocumentsProxy.content'),
   taps         : filterBy('allDocuments', 'type', 'tap'),
   beers        : filterBy('allDocuments', 'type', 'beer'),
+
+  _fetch () {
+    return this
+      .get('prismic')
+      .findAllDocuments()
+  },
+
+  actions: {
+    refetch () {
+      this.set('allDocumentsPromise', this._fetch())
+    },
+  }
 
 })

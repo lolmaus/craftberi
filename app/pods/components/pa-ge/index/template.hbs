@@ -8,6 +8,9 @@
     class    = (concat componentCssClassName '-table _taps')
     mode     = "tap"
   }}
+{{else if allDocumentsProxy.isRejected}}
+  Не удалось загрузить.
+  <a href {{action 'refetch'}}>Попроовать снова</a>
 {{else}}
   Загружаем...
 {{/if}}
@@ -23,6 +26,9 @@
     class = (concat componentCssClassName '-table _bottles')
     mode  = "tap"
   }}
+{{else if allDocumentsProxy.isRejected}}
+  Не удалось загрузить.
+  <a href {{action 'refetch'}}>Попроовать снова</a>
 {{else}}
   Загружаем...
 {{/if}}
