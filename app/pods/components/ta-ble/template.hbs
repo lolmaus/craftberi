@@ -1,0 +1,13 @@
+<div class = "{{componentCssClassName}}-table">
+
+  {{#each rows as |row|}}
+    <div class = "{{componentCssClassName}}-table-row {{rowClass}}">
+      {{#each columns as |column|}}
+        <div class = "{{componentCssClassName}}-table-cell _{{column.slug}}">
+          {{yield row column}}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}{{! rows }}
+
+</div>{{! table }}

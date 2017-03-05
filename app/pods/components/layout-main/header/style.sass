@@ -1,11 +1,118 @@
-@at-root
-  @import app/styles/helpers/container
+@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
-  ////------------------------------------------
-  &-container
-    //------------------------------------------
+@import app/styles/helpers/container
+@import app/styles/helpers/position
 
-    +container
-    padding-top    : config-get('cb.layout.container.padding')
-    padding-bottom : config-get('cb.layout.container.padding')
 
+
+$s : &
+
+
+
+////------------------------------------------
+&
+  //------------------------------------------
+
+  // ----- Blurry background -----
+  position : relative
+  color    : white
+  overflow : hidden
+
+  > *
+    position : relative
+    z-index  : 1
+
+  &:before
+    +overstretch
+    content : ''
+
+    background :
+      color    : black
+      image    : url('http://i.imgur.com/grRbtFS.jpg')
+      position : center
+      repeat   : no-repeat
+      size     : cover
+
+    filter : blur(3px)
+
+
+
+////------------------------------------------
+@at-root &-container
+  //------------------------------------------
+
+  // ----- Layout -----
+  +container
+
+
+
+  // ----- Looks -----
+
+  // ----- RWD -----
+  +to(xs)
+    padding-top    : 10%
+    padding-bottom : 10%
+
+    @at-root #{$s}-image
+      padding-left  : 20%
+      padding-right : 20%
+      margin-bottom : 10%
+
+    @at-root #{$s}-text
+      text-align : center
+
+    @at-root #{$s}-title
+      font-size : 2.5rem
+
+    @at-root #{$s}-subtitle
+      font-size  : 1.5rem
+      margin-top : 0.5rem
+
+  +from(s)
+    display         : flex
+    justify-content : center
+    align-items     : center
+    padding         : 10%
+
+    @at-root #{$s}-image
+      width        : 200px
+      flex-grow    : 0
+      margin-right : 5%
+
+    @at-root #{$s}-text
+      flex-grow : 0
+
+    @at-root #{$s}-title
+      font-size : 3.5rem
+
+    @at-root #{$s}-subtitle
+      font-size  : 2.2rem
+      margin-top : 0.5rem
+
+  +from(m)
+    @at-root #{$s}-image
+      width : 300px
+
+    @at-root #{$s}-title
+      font-size : 4.5rem
+
+    @at-root #{$s}-subtitle
+      font-size  : 3rem
+      margin-top : 1rem
+
+////------------------------------------------
+@at-root &-text
+  //------------------------------------------
+
+  // ----- Looks -----
+  text-shadow : 0 0 3px black, 0 0 5px black, 0 0 7px black,  0 0 10px black
+
+
+
+////------------------------------------------
+@at-root &-subtitle
+  //------------------------------------------
+
+  // ----- Looks -----
+  font-weight : normal
+  opacity     : 0.9

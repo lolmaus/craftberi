@@ -4,6 +4,7 @@ import Component from 'ember-component'
 
 export default Component.extend({
 
-  tap: undefined,
-
+  columns:  undefined, // {slug}
+  rows:     undefined,
+  rowClass: '',
 })

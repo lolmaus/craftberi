@@ -1,0 +1,60 @@
+@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+//@import app/styles/helpers/container
+//@import app/styles/helpers/position
+
+
+
+$s : &
+
+
+
+////------------------------------------------
+&
+  //------------------------------------------
+
+  // ----- Blurry background -----
+
+
+
+////------------------------------------------
+@at-root &-table
+  //------------------------------------------
+
+  // ----- Layout -----
+
+
+
+  // ----- Looks -----
+
+
+
+  // ----- RWD -----
+  +from(m)
+    @at-root #{$s}-table
+      display : table
+      width   : 100%
+
+    @at-root #{$s}-table-row
+      display : table-row
+
+    @at-root #{$s}-table-cell
+      display : table-cell
+      padding : 1rem
+
+
+
+////------------------------------------------
+@at-root &-table-row
+  //------------------------------------------
+
+  // ----- Layout -----
+
+
+
+  // ----- Looks -----
+  &:first-child
+    background-color : darkgrey
+
+  &:nth-child(odd):not(:first-child)
+    background-color : lightgrey

@@ -1,0 +1,33 @@
+//@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+@import app/styles/helpers/container
+//@import app/styles/helpers/position
+
+
+
+$s : &
+
+
+
+////------------------------------------------
+&
+  //------------------------------------------
+
+  // ----- Layout -----
+  +container
+
+  // ----- Content layout -----
+  @at-root #{$s}-header
+    margin-bottom: 2rem
+
+    &:not(:first-child)
+      margin-top: 3rem
+
+
+
+////------------------------------------------
+@at-root &-header
+  //------------------------------------------
+
+  // ----- Text -----
+  font-size: 2rem

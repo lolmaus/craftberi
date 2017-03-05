@@ -1,0 +1,13 @@
+=stretch
+  position : absolute
+  top      : 0
+  left     : 0
+  width    : 100%
+  height   : 100%
+
+=overstretch($percentage : 1%)
+  position : absolute
+  top      : -$percentage
+  left     : -$percentage
+  width    : 100% + $percentage * 2
+  height   : 100% + $percentage * 2
