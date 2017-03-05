@@ -3,7 +3,11 @@
   {{#each rows as |row|}}
     <div class = "{{componentCssClassName}}-table-row {{rowClass}}">
       {{#each columns as |column|}}
-        <div class = "{{componentCssClassName}}-table-cell _{{column.slug}}">
+        <div class = "{{componentCssClassName}}-table-cell {{cellClass}} _{{column.slug}}">
+          <span class = "{{componentCssClassName}}-table-cell-label">
+            {{yield rows.firstObject column}}
+          </span>
+
           {{yield row column}}
         </div>
       {{/each}}

@@ -1,7 +1,8 @@
 {{#ta-ble
-  columns  = columns
-  rows     = (append 'header' (sort-by 'number' taps))
-  rowClass = (concat componentCssClassName '-row')
+  columns   = columns
+  rows      = (append 'header' (sort-by 'number' taps))
+  rowClass  = (concat componentCssClassName '-row')
+  cellClass = (concat componentCssClassName '-cell')
   as |tap column|
 }}
   {{#if (eq column.slug 'number')}}
@@ -15,7 +16,7 @@
     {{#if (eq tap 'header')}}
       Название
     {{else}}
-      {{{tap.beer.name}}}
+      {{strip-tags tap.beer.name}}
     {{/if}}
 
   {{else if (eq column.slug 'style')}}
@@ -33,7 +34,7 @@
     {{#if (eq tap 'header')}}
       Пивоварня
     {{else}}
-      {{{tap.beer.brewery.name}}}
+      {{strip-tags tap.beer.brewery.name}}
     {{/if}}
 
   {{else if (eq column.slug 'ibu')}}
@@ -63,14 +64,14 @@
     {{#if (eq tap 'header')}}
       <abbr title = "Цена за бокал">₽/🍺</abbr>
     {{else}}
-      {{tap.beer.pricePint}}₽
+      {{tap.beer.pricePint}} ₽
     {{/if}}
 
   {{else if (eq column.slug 'price-liter')}}
     {{#if (eq tap 'header')}}
       <abbr title = "Цена за литр">₽/л</abbr>
     {{else}}
-      {{tap.beer.priceLiter}}₽
+      {{tap.beer.priceLiter}} ₽
     {{/if}}
   {{/if}}
 {{/ta-ble}}

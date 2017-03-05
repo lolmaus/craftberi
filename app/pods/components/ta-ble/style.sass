@@ -30,17 +30,89 @@ $s : &
 
 
   // ----- RWD -----
-  +from(m)
-    @at-root #{$s}-table
-      display : table
-      width   : 100%
+  +to(s)
+    display   : flex
+    flex-wrap : wrap
 
-    @at-root #{$s}-table-row
+    #{$s}-table-row
+      margin-bottom : 6%
+      padding       : 2rem
+
+      background-color: lightgrey
+
+      display        : flex
+      flex-direction : column
+      position       : relative
+
+      &:first-child
+        display: none
+
+    #{$s}-table-cell._number
+      position    : absolute
+      top         : -1.5rem
+      left        : -1rem
+      width       : auto
+      font-size   : 3rem
+      font-weight : bold
+      color       : grey
+      transform   : rotate(-20deg)
+
+    #{$s}-table-cell._name
+      order : -2
+
+      #{$s}-table-cell-label
+        display: none
+
+    #{$s}-table-cell._style
+      order : -1
+
+      #{$s}-table-cell-label
+        display: none
+
+    #{$s}-table-cell._brewery
+      #{$s}-table-cell-label
+        display: none
+
+  +at(xxs)
+    #{$s}-table-row
+      width : 100%
+
+  +at(xs)
+    #{$s}-table-row
+      width : 47%
+
+      &:nth-child(even)
+        margin-right : 6%
+
+  +at(s)
+    #{$s}-table-row
+      width : 27%
+
+      &:nth-child(3n), &:nth-child(3n+2)
+        margin-right : 6%
+
+
+
+
+  +from(m)
+    display : table
+    width   : 100%
+
+    #{$s}-table-row
       display : table-row
 
-    @at-root #{$s}-table-cell
+      &:first-child
+        background-color : darkgrey
+
+      &:nth-child(odd):not(:first-child)
+        background-color : lightgrey
+
+    #{$s}-table-cell
       display : table-cell
       padding : 1rem
+
+    #{$s}-table-cell-label
+      display: none
 
 
 
@@ -53,8 +125,16 @@ $s : &
 
 
   // ----- Looks -----
-  &:first-child
-    background-color : darkgrey
 
-  &:nth-child(odd):not(:first-child)
-    background-color : lightgrey
+
+
+////------------------------------------------
+@at-root &-table-cell._name
+  //------------------------------------------
+
+  // ----- Layout -----
+
+
+
+  // ----- Looks -----
+  font-size: 1.2em
