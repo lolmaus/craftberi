@@ -13,6 +13,7 @@ const PromiseObject = EmberObject.extend(PromiseProxyMixin)
 export default Component.extend({
 
   prismic : service(),
+  fastboot: service(),
 
   allDocumentsPromise : computed(function () {
     return this._fetch()

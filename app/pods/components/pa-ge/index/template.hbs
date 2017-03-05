@@ -2,7 +2,9 @@
   Сегодня на кранах
 </h2>
 
-{{#if allDocumentsProxy.isFulfilled}}
+{{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+  Загружаем...
+{{else if allDocumentsProxy.isFulfilled}}
   {{beer-table/tap
     taps     = taps
     class    = (concat componentCssClassName '-table _taps')
@@ -11,8 +13,6 @@
 {{else if allDocumentsProxy.isRejected}}
   Не удалось загрузить.
   <a href {{action 'refetch'}}>Попроовать снова</a>
-{{else}}
-  Загружаем...
 {{/if}}
 
 
@@ -20,7 +20,9 @@
   Сегодня на бутылках
 </h2>
 
-{{#if allDocumentsProxy.isFulfilled}}
+{{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+  Загружаем...
+{{else if allDocumentsProxy.isFulfilled}}
   {{beer-table/bottle
     beers = (filter-by 'bottle' 'yes' beers)
     class = (concat componentCssClassName '-table _bottles')
@@ -29,6 +31,4 @@
 {{else if allDocumentsProxy.isRejected}}
   Не удалось загрузить.
   <a href {{action 'refetch'}}>Попроовать снова</a>
-{{else}}
-  Загружаем...
 {{/if}}
