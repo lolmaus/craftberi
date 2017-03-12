@@ -1,34 +1,63 @@
-<h2 class = "{{componentCssClassName}}-header">
-  Сегодня на кранах
-</h2>
+<div class= "{{componentCssClassName}}-section _instagram">
 
-{{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
-  Загружаем...
-{{else if allDocumentsProxy.isFulfilled}}
-  {{beer-table/tap
-    taps     = taps
-    class    = (concat componentCssClassName '-table _taps')
-    mode     = "tap"
+  <h2 class = "{{componentCssClassName}}-section-header">
+    Наша лента Instagram
+  </h2>
+
+  {{photo-feed
+    photos = photos
   }}
-{{else if allDocumentsProxy.isRejected}}
-  Не удалось загрузить.
-  <a href {{action 'refetch'}}>Попроовать снова</a>
-{{/if}}
+
+</div>{{! section _instagram }}
 
 
-<h2 class = "{{componentCssClassName}}-header">
-  Сегодня в бутылках
-</h2>
 
-{{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
-  Загружаем...
-{{else if allDocumentsProxy.isFulfilled}}
-  {{beer-table/bottle
-    beers = (filter-by 'bottle' 'yes' beers)
-    class = (concat componentCssClassName '-table _bottles')
-    mode  = "tap"
-  }}
-{{else if allDocumentsProxy.isRejected}}
-  Не удалось загрузить.
-  <a href {{action 'refetch'}}>Попроовать снова</a>
-{{/if}}
+<div class= "{{componentCssClassName}}-section _beer">
+  <div class= "{{componentCssClassName}}-subsection _tap">
+    <h2 class = "{{componentCssClassName}}-section-header">
+      Сегодня на кранах
+    </h2>
+
+    {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+      Загружаем...
+    {{else if allDocumentsProxy.isFulfilled}}
+      {{beer-list
+        parentClass = (concat componentCssClassName '-subsection-tap-beerList')
+        beers       = (map-by 'beer' (sort-by 'number' taps))
+        mode        = "tap"
+      }}
+    {{else if allDocumentsProxy.isRejected}}
+      Не удалось загрузить.
+      <a href {{action 'refetch'}}>Попроовать снова</a>
+    {{/if}}
+  </div>{{! subsection _tap }}
+
+  <div class= "{{componentCssClassName}}-subsection _bottle">
+    <h2 class = "{{componentCssClassName}}-section-header">
+      Сегодня в бутылках
+    </h2>
+
+    {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+      Загружаем...
+    {{else if allDocumentsProxy.isFulfilled}}
+      {{#each (sort-by 'name' breweries) as |brewery|}}
+        {{#with (filter-by 'bottle' 'yes' (sort-by 'name' brewery.beers)) as |beers|}}
+          <div class= "{{componentCssClassName}}-subsection-bottle-group">
+            <h3 class= "{{componentCssClassName}}-subsection-bottle-title">
+              {{strip-tags brewery.name}}
+            </h3>
+
+            {{beer-list
+              parentClass = (concat componentCssClassName '-subsection-bottle-beerList')
+              beers       = beers
+              mode        = "bottle"
+            }}
+          </div>
+        {{/with}}{{! beers }}
+      {{/each}}{{! breweries }}
+    {{else if allDocumentsProxy.isRejected}}
+      Не удалось загрузить.
+      <a href {{action 'refetch'}}>Попроовать снова</a>
+    {{/if}}
+  </div>{{! subsection _bottle }}
+</div>{{!section _beer}}

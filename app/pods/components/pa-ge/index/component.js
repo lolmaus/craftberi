@@ -28,6 +28,7 @@ export default Component.extend({
   allDocuments : reads('allDocumentsProxy.content'),
   taps         : filterBy('allDocuments', 'type', 'tap'),
   beers        : filterBy('allDocuments', 'type', 'beer'),
+  breweries    : filterBy('allDocuments', 'type', 'brewery'),
 
   _fetch () {
     if (this.get('fastboot.isFastBoot')) return RSVP.resolve()

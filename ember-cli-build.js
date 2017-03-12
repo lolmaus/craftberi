@@ -10,6 +10,13 @@ module.exports = function (defaults) {
         '/'
       ]
     },
+
+    dotEnv: {
+      clientAllowedKeys: [
+        'CB_INSTAGRAM_USER_ID',
+        'CB_INSTAGRAM_ACCESS_TOKEN'
+      ]
+    }
   })
 
   // Use `app.import` to add additional libraries to the generated

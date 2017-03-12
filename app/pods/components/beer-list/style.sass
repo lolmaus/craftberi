@@ -1,0 +1,24 @@
+@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+@import app/styles/components/beer-list-item
+
+
+
+$s      : &
+$gutter : 2rem
+
+
+
+////------------------------------------------
+&
+  //------------------------------------------
+
+  // ----- RWD -----
+  @at-root #{$s}-item
+    margin-bottom : $gutter
+
+    +to(xs)
+      +beerListItem-small
+
+    +from(s)
+      +beerListItem-medium

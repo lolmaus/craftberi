@@ -1,4 +1,4 @@
-//@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
 @import app/styles/helpers/container
 //@import app/styles/helpers/position
@@ -10,24 +10,74 @@ $s : &
 
 
 ////------------------------------------------
-&
+@at-root #{$s}
   //------------------------------------------
 
   // ----- Layout -----
   +container
 
   // ----- Content layout -----
-  @at-root #{$s}-header
+  #{$s}-section-header
     margin-bottom: 2rem
 
-    &:not(:first-child)
-      margin-top: 3rem
+  #{$s}-section:not(:first-child)
+    margin-top: 3rem
 
 
 
 ////------------------------------------------
-@at-root &-header
+@at-root &-section._beer
   //------------------------------------------
 
   // ----- Text -----
-  font-size: 2rem
+  +from(xl)
+    display: flex
+
+    #{$s}-subsection
+      $subsection-width: 48%
+      width: $subsection-width
+
+      &:first-child
+        margin-right: 100% - $subsection-width * 2
+
+
+
+////------------------------------------------
+@at-root &-section-header
+  //------------------------------------------
+
+  // ----- Position -----
+  position : sticky
+  top      : 0
+  z-index  : 110
+
+  // ----- Looks -----
+  font-size        : 2rem
+  border-bottom    : 1px solid black
+  background-color : white
+
+
+
+////------------------------------------------
+@at-root &-subsection._tap
+  //------------------------------------------
+
+  // ----- Content layout -----
+  #{$s}-subsection-tap-beerList-item-titleAndBrewery
+    top: 44px
+
+
+
+////------------------------------------------
+@at-root &-subsection-bottle-title
+  //------------------------------------------
+
+  // ----- Position -----
+  position : sticky
+  top      : 48px
+  z-index  : 100
+
+  // ----- Text -----
+  font-size        : 1.8rem
+  border-bottom    : 1px solid black
+  background-color : white

@@ -10,6 +10,7 @@ export default Model.extend({
   name             : attr('string'),
   description      : attr('string'),
   website          : attr('string'),
+  image            : attr(),
   style            : attr('string'),
   styleExplanation : attr('string'),
   ibu              : attr('number'),

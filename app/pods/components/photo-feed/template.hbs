@@ -1,0 +1,26 @@
+{{#swiper-container
+  grabCursor    = true
+  pagination    = true
+  slidesPerView = 10
+  spaceBetween  = 10
+  breakpoints   = breakpoints
+  class         = (concat componentCssClassName '-container')
+}}
+  {{#each photos as |photo|}}
+    {{#swiper-slide
+      class  = (concat componentCssClassName '-slide')
+    }}
+      <a
+        class = "{{componentCssClassName}}-slide-inner"
+        href  = {{photo.pageURL}}
+      >
+        <img
+          src   = {{photo.imageURL}}
+          alt   = {{photo.caption}}
+          title = {{photo.caption}}
+          class = "{{componentCssClassName}}-image"
+        >
+      </a>
+    {{/swiper-slide}}
+  {{/each}}
+{{/swiper-container}}

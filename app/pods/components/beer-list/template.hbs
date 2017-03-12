@@ -1,0 +1,9 @@
+{{#each beers as |beer|}}
+  {{beer-list/item
+    class            = (concat componentCssClassName '-item')
+    parentClass      = (concat componentCssClassName '-item')
+    grandParentClass = (concat parentClass           '-item')
+    beer             = beer
+    mode             = mode
+  }}
+{{/each}}

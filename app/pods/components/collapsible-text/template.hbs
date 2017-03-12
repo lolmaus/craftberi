@@ -1,0 +1,13 @@
+<div class="{{componentCssClassName}}-content">
+  {{{currentContent}}}
+
+  {{#if isCollapsible}}
+    <a
+      href
+      class="{{componentCssClassName}}-button"
+      {{action 'toggle'}}
+    >
+      {{if isExpanded 'Свернуть' 'Развернуть'}}
+    </a>
+  {{/if}}{{! isCollapsible }}
+</div>{{! content }}

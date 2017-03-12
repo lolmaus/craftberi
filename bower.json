@@ -1,5 +1,6 @@
 {
   "name": "craftberi",
   "dependencies": {
+    "swiper": "~3.4.1"
   }
 }

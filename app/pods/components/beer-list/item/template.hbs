@@ -1,0 +1,133 @@
+<div class = "{{componentCssClassName}}-titleAndBrewery {{parentClass}}-titleAndBrewery {{grandParentClass}}-titleAndBrewery">
+  {{#if (and (eq mode 'tap') beer.tap.number)}}
+    <div class = "{{componentCssClassName}}-tap {{parentClass}}-tap {{grandParentClass}}-tap">
+      {{strip-tags beer.tap.number}}
+    </div>
+  {{/if}}{{! beer.tap.number }}
+
+  <h3 class = "{{componentCssClassName}}-title {{parentClass}}-title {{grandParentClass}}-title">
+    {{strip-tags beer.name}}
+  </h3>
+
+  <div class = "{{componentCssClassName}}-brewery {{parentClass}}-brewery {{grandParentClass}}-brewery">
+    {{#if beer.styleExplanation}}
+      <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+        <abbr title = {{strip-tags beer.styleExplanation}}>
+          {{~strip-tags beer.style~}}
+        </abbr>
+      </span>{{! value }}
+    {{else}}
+      <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+        {{strip-tags beer.style}}
+      </span>{{! value }}
+    {{/if}}{{! explanation }}
+
+    {{#if beer.brewery.name}}
+      от {{strip-tags beer.brewery.name}}
+    {{/if}}{{! brewery.name }}
+  </div>{{! field }}
+</div>{{! titleAndBrewery }}
+
+
+
+<div class = "{{componentCssClassName}}-content {{parentClass}}-content {{grandParentClass}}-content">
+
+  {{#if beer.image.main}}
+    <img
+      class  = "{{componentCssClassName}}-image {{parentClass}}-image {{grandParentClass}}-image"
+      src    = {{beer.image.main.url}}
+      width  = {{beer.image.main.dimensions.width}}
+      height = {{beer.image.main.dimensions.height}}
+      alt    = {{or beer.image.main.alt (concat (strip-tags beer.name) ' от ' (strip-tags beer.brewery.name))}}
+    >
+  {{/if}}{{! beer.image.main }}
+
+  <div class = "{{componentCssClassName}}-fields {{parentClass}}-fields {{grandParentClass}}-fields">
+    {{#if beer.ibu}}
+      <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _ibu">
+        <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+          <abbr title = "Расчетная горечь">IBU</abbr> {{~concat~}}
+        </span>{{! label }}
+
+        <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+          {{strip-tags beer.ibu~}}
+          <img
+            src   = "/icons/hops.png"
+            class = "{{componentCssClassName}}-field-value-icon"
+          >
+        </span>{{! value }}
+      </div>{{! field }}
+    {{/if}}{{! ibu }}
+
+    {{#if beer.abv}}
+      <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _abv">
+        <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+          <abbr title = "Крепость на единицу объема">ABV</abbr> {{~concat~}}
+        </span>{{! label }}
+
+        <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+          {{strip-tags beer.abv}}°
+        </span>{{! value }}
+      </div>{{! field }}
+    {{/if}}{{! abv }}
+
+    {{#if beer.gravity}}
+      <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _gravity">
+        <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+          <abbr title = "Начальная плотность">OG</abbr> {{~concat~}}
+        </span>{{! label }}
+
+        <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+          {{strip-tags beer.gravity}}%
+        </span>{{! value }}
+      </div>{{! field }}
+    {{/if}}{{! gravity }}
+
+    {{#if (eq mode 'tap')}}
+      {{#if beer.pricePint}}
+        <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _price-pint">
+          <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+            <abbr title = "Цена за бокал">₽/🍺</abbr> {{~concat~}}
+          </span>{{! label }}
+
+          <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+            {{strip-tags beer.pricePint}} ₽
+          </span>{{! value }}
+        </div>{{! field }}
+      {{/if}}{{! priceLiter }}
+
+      {{#if beer.priceLiter}}
+        <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _price-liter">
+          <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+            <abbr title = "Цена за литр">₽/🍻</abbr> {{~concat~}}
+          </span>{{! label }}
+
+          <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+            {{strip-tags beer.priceLiter}} ₽
+          </span>{{! value }}
+        </div>{{! field }}
+      {{/if}}{{! pricePint }}
+
+    {{else if (eq mode 'bottle')}}
+      {{#if beer.priceBottle}}
+        <div class = "{{componentCssClassName}}-field {{parentClass}}-field {{grandParentClass}}-field _price-bottle">
+          <span class = "{{componentCssClassName}}-field-label {{parentClass}}-field-label {{grandParentClass}}-field-label">
+            <abbr title = "Цена за бутылку">₽/🍾</abbr> {{~concat~}}
+          </span>{{! label }}
+
+          <span class = "{{componentCssClassName}}-field-value {{parentClass}}-field-value {{grandParentClass}}-field-value">
+            {{strip-tags beer.priceBottle}} ₽
+          </span>{{! value }}
+        </div>{{! field }}
+      {{/if}}{{! priceBottle }}
+    {{/if}}{{! mode }}
+  </div>{{! fields }}
+
+  {{#if beer.description}}
+    {{collapsible-text
+      class   = (concat componentCssClassName "-description " parentClass "-description")
+      content = beer.description
+    }}
+  {{/if}}{{! beer.description }}
+
+</div>{{! content }}

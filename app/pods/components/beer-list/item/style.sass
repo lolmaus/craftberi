@@ -1,0 +1,121 @@
+@import node_modules/sass-toolkit/stylesheets/toolkit/clearfix
+
+
+
+$s: &
+
+
+
+////------------------------------------------
+@at-root #{$s}
+  //------------------------------------------
+
+  // ----- Layout -----
+  position : relative
+
+  // ----- Content layout -----
+
+
+
+////------------------------------------------
+@at-root #{$s}-titleAndBrewery
+  //------------------------------------------
+
+  // ----- Position -----
+  position      : sticky
+  top           : 92px
+  margin-bottom : 1rem
+  z-index       : 98
+
+  // ----- Looks -----
+  background-color : white
+
+  // ----- Content layout -----
+  > *
+    position : relative
+    z-index  : 2
+
+
+
+////------------------------------------------
+@at-root #{$s}-description
+  //------------------------------------------
+
+  // ----- Position -----
+  margin-bottom : 1rem
+
+
+
+////------------------------------------------
+@at-root #{$s}-tap
+  //------------------------------------------
+
+  // ----- Position -----
+  position    : absolute
+  top         : -1.5rem
+  left        : -1rem
+  width       : auto
+  transform   : rotate(-20deg)
+  z-index     : 1
+
+  // ----- Looks -----
+  font-size   : 3rem
+  font-weight : bold
+  color       : lightgrey
+
+  // ----- Content -----
+  &:before
+    content : '№'
+
+
+
+////------------------------------------------
+@at-root #{$s}-title
+  //------------------------------------------
+
+  // ----- Text -----
+  font-size : 1.5rem
+
+
+
+////------------------------------------------
+@at-root #{$s}-content
+  //------------------------------------------
+
+  // ----- Layout -----
+  +clearfix
+
+
+
+////------------------------------------------
+@at-root #{$s}-field-label
+  //------------------------------------------
+
+  // ----- Layout -----
+  display : inline-block
+  width   : 45px
+
+  // ----- Text -----
+  &:after
+    content : ':'
+
+
+
+////------------------------------------------
+@at-root #{$s}-field-value-icon
+  //------------------------------------------
+
+  // ----- Layout -----
+  width: 15px
+
+
+
+
+////------------------------------------------
+@at-root #{$s}-image
+  //------------------------------------------
+
+  // ----- Text -----
+  width      : 100px
+  height     : 100px
+  object-fit : contain
