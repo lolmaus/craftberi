@@ -1,25 +1,31 @@
+// ----- Ember modules -----
 import Component from 'ember-component'
-import {filterBy} from 'ember-computed'
 import EObject from 'ember-object'
+import Evented from 'ember-evented'
 import {next} from 'ember-runloop'
 
+// ----- Ember addons -----
 import computed from 'ember-macro-helpers/computed'
 import raw from 'ember-macro-helpers/raw'
 import reads from 'ember-macro-helpers/reads'
-import collect from 'ember-awesome-macros/collect'
 import conditional from 'ember-awesome-macros/conditional'
 import equal from 'ember-awesome-macros/equal'
-import every from 'ember-awesome-macros/array/every'
 import filter from 'ember-awesome-macros/array/filter'
 import mapBy from 'ember-awesome-macros/array/map-by'
 import sort from 'ember-awesome-macros/array/sort'
 import uniq from 'ember-awesome-macros/array/uniq'
 
+import EEQMixin from 'ember-element-query/mixin'
+
+// ----- Third-party modules -----
 import $ from 'jquery'
 
+// ----- Custom classes -----
+const EventedObject = EObject.extend(Evented)
 
 
-export default Component.extend({
+
+export default Component.extend(EEQMixin, {
 
   // ----- Arguments -----
   beers               : undefined,
@@ -97,6 +103,16 @@ export default Component.extend({
     }
   ),
 
+  areOnlySomeWrappersExpanded : computed(
+             'areAllWrappersExpanded', 'beersWrapped.@each.isExpanded',
+    function (areAllWrappersExpanded,   beersWrapped) {
+      return (
+        beersWrapped.mapBy('isExpanded').any(value => value)
+        && !areAllWrappersExpanded
+      )
+    }
+  ),
+
   breweries : sort(uniq(mapBy('beers', raw('brewery'))), ['name']),
 
   _getSortOption () {
@@ -134,16 +150,12 @@ export default Component.extend({
       }
     },
 
-    expandAll () {
-      this
-        .get('beersWrapped')
-        .forEach(wrapper => wrapper.set('isExpanded', true))
-    },
+    toggleIsExpanded () {
+      const value = !this.get('areAllWrappersExpanded')
 
-    collapseAll () {
       this
         .get('beersWrapped')
-        .forEach(wrapper => wrapper.set('isExpanded', false))
+        .forEach(wrapper => wrapper.set('isExpanded', value))
     },
 
     goToBrewery (brewery) {

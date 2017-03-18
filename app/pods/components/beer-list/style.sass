@@ -1,6 +1,8 @@
 @at-root
 
   @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+  @import node_modules/ember-element-query/addon/mixins
+
 
   //@import app/pods/components/beer-list/item/mixins
 
@@ -14,23 +16,44 @@
   .beerList
     //------------------------------------------
 
+    // ----- Layout -----
+    overflow : hidden
+
     // ----- RWD -----
-    .beerList-item
-      margin-bottom : $gutter
+    +eq-from(m)
+      $sidebar-width : 200px
+      display     : flex
+      align-items : flex-start
+
+      .beerList-controls
+        width       : $sidebar-width
+        height      : auto !important
+        flex-grow   : 0
+        flex-shrink : 0
+
+      .beerList-beers
+        flex-grow   : 1
+        flex-shrink : 0
+
 
 
 
   ////------------------------------------------
-  .beerList-sortOptions
+  .beerList-controls
     //------------------------------------------
 
+    // ----- Layout -----
+    .beerList-options, .beerList-breweries
+      margin-top: 1rem
+
+
     // ----- RWD -----
-    +to(xs)
-      .beerList-sortOption
+    +eq-to(xs)
+      .beerList-sortOption, .beerList-option
         display: table
 
-    +from(s)
-      .beerList-sortOption
+    +eq-from(s)
+      .beerList-sortOption, .beerList-option
         display: inline-block
         &:not(:last-child)
           margin-right: 0.5em
@@ -44,8 +67,59 @@
 
     // ----- Looks -----
     text-decoration: none
-    border-bottom: 1px dashed blue
+    border-bottom: 1px dashed
 
     // ----- Behavior -----
     &.-current
       font-weight: bold
+
+
+
+
+  ////------------------------------------------
+  .beerList-option
+    //------------------------------------------
+
+    // ----- Looks -----
+    cursor: pointer
+
+
+
+
+  ////------------------------------------------
+  .beerList-beers
+    //------------------------------------------
+
+    // ----- Content layout -----
+
+
+
+
+  ////------------------------------------------
+  .beerList-breweries
+    //------------------------------------------
+
+    // ----- Layout -----
+    columns: 200px auto
+
+
+
+
+  ////------------------------------------------
+  .beerList-beers-beers
+    //------------------------------------------
+
+    // ----- Content layout -----
+    .beerList-beers-beers-group
+      &:not(:last-child)
+        margin-bottom: 3rem
+
+
+
+
+  ////------------------------------------------
+  .beerList-beers-beers-group-title
+    //------------------------------------------
+
+    // ----- Text -----
+    font-size: 3rem

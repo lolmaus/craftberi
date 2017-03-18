@@ -17,7 +17,7 @@
     </h2>{{! subsection-title }}
 
     <div class = 'paGe_index-subsection-content'>
-      {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+      {{#liquid-if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
         Загружаем...
       {{else if allDocumentsProxy.isFulfilled}}
         {{beer-list
@@ -28,7 +28,7 @@
       {{else if allDocumentsProxy.isRejected}}
         Не удалось загрузить.
         <a href {{action 'refetch'}}>Попроовать снова</a>
-      {{/if}}
+      {{/liquid-if}}
     </div>{{! subsection-content }}
   </div>{{! subsection _tap }}
 
@@ -45,7 +45,7 @@
     </h2>{{! subsection-title }}
 
     <div class = 'paGe_index-subsection-content'>
-      {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+      {{#liquid-if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
         Загружаем...
       {{else if allDocumentsProxy.isFulfilled}}
         {{beer-list
@@ -56,7 +56,7 @@
       {{else if allDocumentsProxy.isRejected}}
         Не удалось загрузить.
         <a href {{action 'refetch'}}>Попроовать снова</a>
-      {{/if}}
+      {{/liquid-if}}
     </div>{{! subsection-content }}
   </div>{{! subsection _bottle }}
 

@@ -6,8 +6,16 @@
       </div>
     {{/if}}{{! beer.tapNumber }}
 
-    <h3 class = "beerListItem-title">
-      {{strip-tags beer.name}}
+    <h3
+      class = "beerListItem-title"
+    >
+      <a
+        href
+        class = "beerListItem-title-link"
+        {{action 'toggleIsExpanded'}}
+      >
+        {{strip-tags beer.name}}
+      </a>
     </h3>
 
     <div class = "beerListItem-brewery">

@@ -7,11 +7,19 @@ export default Component.extend({
   // ----- Arguments -----
   beer             : undefined,
   mode             : undefined, // 'tap' or 'bottle'
-  parentClass      : undefined,
-  grandParentClass : undefined,
+  isExpanded       : undefined,
 
 
 
   // ----- Overridden properties -----
-  classNames : ['beerList_item']  ,
+  classNames : ['beerList_item'],
+
+
+
+  // ----- Actions -----
+  actions: {
+    toggleIsExpanded () {
+      this.toggleProperty('isExpanded')
+    }
+  }
 })

@@ -1,4 +1,7 @@
-<div class = 'beerList-controls'>
+{{#e-q
+  class  = 'beerList-controls'
+  top    = 0
+}}
 
   <div class = 'beerList-sortOptions'>
     {{#each sortOptions as |sortOption|}}
@@ -39,15 +42,16 @@
       }}
 
       <span class   = 'beerList-option-label'>
-        Группировать по пивоварням
+        Группировать по пивоварням
       </span>{{! option-label }}
     </label>{{! option _group}}
 
     <label class = 'beerList-option _group'>
       {{one-way-checkbox
-        class   = 'beerList-option-checkbox'
-        checked = groupByBreweryEffective
-        update  = (action 'toggleIsExpanded')
+        class         = 'beerList-option-checkbox'
+        checked       = areAllWrappersExpanded
+        indeterminate = areOnlySomeWrappersExpanded
+        update        = (action 'toggleIsExpanded')
       }}
 
       <span class   = 'beerList-option-label'>
@@ -57,31 +61,36 @@
 
   </div>{{! options }}
 
-</div>{{! controls }}
 
 
-
-
-<div>
-  {{#if groupByBreweryEffective}}
-    <div>
+  {{#liquid-if groupByBreweryEffective}}
+    <div class = 'beerList-breweries'>
       {{#each (sort-by 'name' breweries) as |brewery|}}
-        <div>
+        <div class = 'beerList-brewery'>
           <a
             href
             {{action 'goToBrewery' brewery}}
           >
             {{strip-tags brewery.name}}
           </a>
-        </div>
-      {{/each}}
-    </div>
+        </div>{{! brewery}}
+      {{/each}}{{! breweries }}
+    </div>{{! breweries }}
+  {{/liquid-if}}{{! groupByBreweryEffective }}
 
-    <div>
+{{/e-q}}{{! controls }}
+
+
+
+
+<div class = 'beerList-beers'>
+  {{#if groupByBreweryEffective}}
+
+    <div class = "beerList-beers-beers">
       {{#each breweries as |brewery|}}
-        <div>
+        <div class = "beerList-beers-beers-group">
           <h3
-            class = 'beerList-brewery-title _brewery-{{brewery.id}}'
+            class = 'beerList-beers-beers-group-title _brewery-{{brewery.id}}'
 
           >
             {{strip-tags brewery.name}}
@@ -106,11 +115,11 @@
           </div>
         </div>
       {{/each}}
-    </div>
+    </div>{{! beers-beers }}
 
-  {{else}}
+  {{else}}{{! groupByBreweryEffective }}
 
-    <div>
+    <div class = "beerList-beers-beers">
       {{#each
         (sort-by
           (concat 'beer.' currentSortOption.path ':' currentSortOrder)
@@ -126,7 +135,7 @@
           mode             = mode
         }}
       {{/each}}
-    </div>
+    </div>{{! beers-beers }}
 
-  {{/if}}
-</div>
+  {{/if}}{{! groupByBreweryEffective }}
+</div>{{! beers }}

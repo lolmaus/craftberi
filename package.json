@@ -50,6 +50,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-composable-helpers": "^2.0.0",
     "ember-data": "^2.11.0",
+    "ember-element-query": "lolmaus/ember-element-query#use-ember-evented",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
     "ember-macro-helpers": "^0.9.2",
