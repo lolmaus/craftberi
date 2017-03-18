@@ -1,0 +1,135 @@
+<div class = "beerListItem-main">
+  <div class = "beerListItem-titleAndBrewery">
+    {{#if (and (eq mode 'tap') beer.tapNumber)}}
+      <div class = "beerListItem-tap">
+        {{strip-tags beer.tapNumber}}
+      </div>
+    {{/if}}{{! beer.tapNumber }}
+
+    <h3 class = "beerListItem-title">
+      {{strip-tags beer.name}}
+    </h3>
+
+    <div class = "beerListItem-brewery">
+      {{#if beer.brewery.name}}
+        от
+        <a
+          href = {{beer.brewery.website}}
+        >{{strip-tags beer.brewery.name}}</a>
+
+        {{#if beer.brewery.location}}
+          ({{strip-tags beer.brewery.location}})
+        {{/if}}
+      {{/if}}{{! brewery.name }}
+    </div>{{! brewery }}
+  </div>{{! titleAndBrewery }}
+
+  <div class = "beerListItem-fieldsAndToggler">
+    <div class = "beerListItem-fields">
+      {{#if beer.style}}
+        <div
+          class = "beerListItem-field _style"
+          title = {{strip-tags beer.styleExplanation}}
+        >
+          {{~concat~}}
+          {{strip-tags beer.style}}
+          {{~concat~}}
+        </div>{{! field }}
+      {{/if}}{{! style }}
+
+      {{#if beer.ibu}}
+        <div
+          class = "
+            beerListItem-field _ibu"
+          title = "IBU (расчетная горечь)"
+        >
+          {{~concat~}}
+          {{strip-tags beer.ibu}}
+          {{~concat~}}
+          <img
+            src   = "/icons/hops.png"
+            class = "beerListItem-field-value-icon"
+          >
+          {{~concat~}}
+        </div>{{! field }}
+      {{/if}}{{! ibu }}
+
+      {{#if beer.abv}}
+        <div
+          class = "beerListItem-field _abv"
+          title = "ABV (крепость на единицу объема)"
+        >
+          {{~concat~}}
+          {{strip-tags beer.abv}}°
+          {{~concat~}}
+        </div>{{! field }}
+      {{/if}}{{! abv }}
+
+      {{#if beer.gravity}}
+        <div
+          class = "beerListItem-field _og"
+          title = "OG (начальная плотность)"
+        >
+          {{~concat~}}
+          {{strip-tags beer.gravity}}%
+          {{~concat~}}
+        </div>{{! field }}
+      {{/if}}{{! gravity }}
+
+      {{#if (eq mode 'tap')}}
+        {{#if beer.pricePint}}
+          <div
+            class = "beerListItem-field _price-pint"
+            title = "цена за бокал"
+          >
+            {{~concat~}}
+            {{strip-tags beer.pricePint}} ₽/🍺
+            {{~concat~}}
+          </div>{{! field }}
+        {{/if}}{{! priceLiter }}
+
+        {{#if beer.priceLiter}}
+          <div
+            class = "beerListItem-field _price-liter"
+            title = "цена за литр"
+          >
+            {{~concat~}}
+            {{strip-tags beer.priceLiter}} ₽/л
+            {{~concat~}}
+          </div>{{! field }}
+        {{/if}}{{! pricePint }}
+
+      {{else if (eq mode 'bottle')}}
+        {{#if beer.priceBottle}}
+          <div
+            class = "beerListItem-field _price-bottle"
+            title = "цена за бутылку"
+          >
+            {{~concat~}}
+            {{strip-tags beer.priceBottle}} ₽
+            {{~concat~}}
+          </div>{{! field }}
+        {{/if}}{{! priceBottle }}
+      {{/if}}{{! mode }}
+    </div>{{! fields }}
+
+    <div class = "beerListItem-toggler">
+    </div>
+  </div>{{! toggler }}
+</div>{{!main}}
+
+{{#liquid-if isExpanded}}
+  <div class = "beerListItem-content">
+    {{#if beer.image.main}}
+      <img
+        class  = "beerListItem-image"
+        src    = {{beer.image.main.url}}
+        width  = {{beer.image.main.dimensions.width}}
+        height = {{beer.image.main.dimensions.height}}
+        alt    = {{or beer.image.main.alt (concat (strip-tags beer.name) ' от ' (strip-tags beer.brewery.name))}}
+      >
+    {{/if}}{{! beer.image.main }}
+
+    {{{beer.description}}}
+  </div>{{! content }}
+{{/liquid-if}}

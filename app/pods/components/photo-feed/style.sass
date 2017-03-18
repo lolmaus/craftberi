@@ -1,0 +1,54 @@
+@at-root
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+  @import app/styles/helpers/position
+
+
+
+  ////------------------------------------------
+  .photoFeed
+    //------------------------------------------
+
+    // ----- Content layout -----
+    .swiper-pagination
+      position : static
+
+    .photoFeed-slide
+      margin-right : 10px
+
+    &.-fastboot
+      .swiper-wrapper
+        display: flex
+
+      .photoFeed-slide
+        display     : none
+        flex-shrink : 1
+        flex-grow   : 0
+
+
+
+      @for $i from 1 through 10
+        @media (min-width: #{$i * 200px})
+          @for $k from 1 through $i
+            .photoFeed-slide:nth-child(#{$k})
+              display : block
+
+
+
+  ////------------------------------------------
+  .photoFeed-slide
+    //------------------------------------------
+
+    // ----- Layout -----
+
+    // ----- Content layout -----
+    .photoFeed-slide-inner
+      display     : block
+      padding-top : 100%
+      height      : 0
+      position    : relative
+
+    .photoFeed-image
+      +stretch
+      object-fit: cover
+

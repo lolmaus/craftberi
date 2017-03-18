@@ -1,0 +1,39 @@
+@at-root
+
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+  @import app/pods/components/beer-list/item/mixins
+
+
+
+  $gutter : 2rem
+
+
+
+  ////------------------------------------------
+  .beerList
+    //------------------------------------------
+
+    // ----- RWD -----
+    .beerList-item
+      margin-bottom : $gutter
+
+      +to(xs)
+        +beerListItem-small
+
+      +from(s)
+        +beerListItem-medium
+
+
+
+  ////------------------------------------------
+  .beerList-sortOption
+    //------------------------------------------
+
+    // ----- Looks -----
+    text-decoration: none
+    border-bottom: 1px dashed blue
+
+    // ----- Behavior -----
+    &.-current
+      font-weight: bold

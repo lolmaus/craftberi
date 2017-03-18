@@ -1,0 +1,127 @@
+<div>
+  <div>
+    <span>
+      Сортировка:
+    </span>
+
+    {{#each sortOptions as |sortOption|}}
+      <span>
+        <a
+          href
+          class = "
+            beerList-sortOption
+            {{if (eq sortOption currentSortOption) '-current' '-not-current'}}
+          "
+          title = {{sortOption.title}}
+          {{action 'sort' sortOption}}
+        >
+          {{~sortOption.label~}}
+        </a>
+
+        {{~concat~}}
+
+        {{#if (eq sortOption currentSortOption)~}}
+          <span>
+            {{~if (eq currentSortOrder 'asc') '▼' '▲'~}}
+          </span>
+        {{/if}}
+      </span>
+    {{/each}}
+  </div>
+
+  <div>
+    <label>
+      {{one-way-checkbox
+        checked = groupByBreweryEffective
+        update  = (action 'toggleGroup')
+      }}
+
+      <span>
+        Группировать по пивоварням
+      </span>
+    </label>
+
+    {{#unless areNoWrappersExpanded}}
+      <a
+        href
+        {{action 'collapseAll'}}
+      >Свернуть всё</a>
+    {{/unless}}
+
+    {{#unless areAllWrappersExpanded}}
+      <a
+        href
+        {{action 'expandAll'}}
+      >Развернуть всё</a>
+    {{/unless}}
+  </div>
+</div>
+
+<div>
+  {{#if groupByBreweryEffective}}
+    <div>
+      {{#each (sort-by 'name' breweries) as |brewery|}}
+        <div>
+          <a
+            href
+            {{action 'goToBrewery' brewery}}
+          >
+            {{strip-tags brewery.name}}
+          </a>
+        </div>
+      {{/each}}
+    </div>
+
+    <div>
+      {{#each breweries as |brewery|}}
+        <div>
+          <h3
+            class = "beerList-brewery-title _brewery-{{brewery.id}}"
+
+          >
+            {{strip-tags brewery.name}}
+          </h3>
+
+          <div>
+            {{#each
+                (sort-by
+                  (concat 'beer.' currentSortOption.path ':' currentSortOrder)
+                  (filter-by 'brewery' brewery beersWrapped)
+                )
+              key = "beer.id"
+              as |beerWrapper|
+            }}
+              {{beer-list/item
+                class            = 'beerList-item'
+                beer             = beerWrapper.beer
+                isExpanded       = beerWrapper.isExpanded
+                mode             = mode
+              }}
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  {{else}}
+
+    <div>
+      {{#each
+        (sort-by
+          (concat 'beer.' currentSortOption.path ':' currentSortOrder)
+          beersWrapped
+        )
+        key = "beer.id"
+        as |beerWrapper|
+      }}
+        {{beer-list/item
+          class            = 'beerList-item'
+          beer             = beerWrapper.beer
+          isExpanded       = beerWrapper.isExpanded
+          mode             = mode
+        }}
+      {{/each}}
+    </div>
+
+  {{/if}}
+</div>

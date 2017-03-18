@@ -1,21 +1,33 @@
+// ----- Ember modules -----
 import Component from 'ember-component'
 import computed, {filterBy, reads} from 'ember-computed'
 import EmberObject from 'ember-object'
 import service from 'ember-service/inject'
 import RSVP from 'rsvp'
 
+// ----- Ember old-school import -----
 import Ember from 'ember'
-
 const {PromiseProxyMixin} = Ember
+
+// ----- Custom classes -----
 const PromiseObject = EmberObject.extend(PromiseProxyMixin)
 
 
 
 export default Component.extend({
 
-  prismic : service(),
-  fastboot: service(),
+  // ----- Services -----
+  prismic  : service(),
+  fastboot : service(),
 
+
+
+  // ----- Overridden properties -----
+  classNames : ['paGe_index'],
+
+
+
+  // ----- Computed properties -----
   allDocumentsPromise : computed(function () {
     return this._fetch()
   }),
@@ -28,7 +40,11 @@ export default Component.extend({
   allDocuments : reads('allDocumentsProxy.content'),
   taps         : filterBy('allDocuments', 'type', 'tap'),
   beers        : filterBy('allDocuments', 'type', 'beer'),
+  breweries    : filterBy('allDocuments', 'type', 'brewery'),
 
+
+
+  // ----- Methods -----
   _fetch () {
     if (this.get('fastboot.isFastBoot')) return RSVP.resolve()
 
@@ -37,7 +53,10 @@ export default Component.extend({
       .findAllDocuments()
   },
 
-  actions: {
+
+
+  // ----- Actions -----
+  actions : {
     refetch () {
       this.set('allDocumentsPromise', this._fetch())
     },

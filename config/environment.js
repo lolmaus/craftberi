@@ -21,6 +21,10 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      instagram: {
+        userId: process.env.CB_INSTAGRAM_USER_ID,
+        token:  process.env.CB_INSTAGRAM_ACCESS_TOKEN,
+      }
     },
 
     prismic: {

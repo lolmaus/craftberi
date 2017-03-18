@@ -1,0 +1,26 @@
+{{#swiper-container
+  grabCursor    = true
+  pagination    = true
+  slidesPerView = 10
+  spaceBetween  = 10
+  breakpoints   = breakpoints
+  class         = 'photoFeed-container'
+}}
+  {{#each photos as |photo|}}
+    {{#swiper-slide
+      class  = 'photoFeed-slide'
+    }}
+      <a
+        class = 'photoFeed-slide-inner'
+        href  = {{photo.pageURL}}
+      >
+        <img
+          src   = {{photo.imageURL}}
+          alt   = {{photo.caption}}
+          title = {{photo.caption}}
+          class = 'photoFeed-image'
+        >
+      </a>
+    {{/swiper-slide}}
+  {{/each}}
+{{/swiper-container}}

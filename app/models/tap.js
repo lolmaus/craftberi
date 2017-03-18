@@ -9,5 +9,5 @@ export default Model.extend({
 
   number: attr('number'),
 
-  beer: belongsTo('beer'),
+  beer: belongsTo('beer', {async: false}),
 })

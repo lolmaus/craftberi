@@ -1,0 +1,121 @@
+@at-root
+
+  @import node_modules/sass-toolkit/stylesheets/toolkit/clearfix
+
+
+
+  ////------------------------------------------
+  .beerListItem
+    //------------------------------------------
+
+    // ----- Layout -----
+    position : relative
+
+    // ----- Content layout -----
+
+
+
+  ////------------------------------------------
+  .beerListItem-titleAndBrewery
+    //------------------------------------------
+
+    // ----- Looks -----
+    background-color : white
+
+    // ----- Content layout -----
+    > *
+      position : relative
+      z-index  : 2
+
+    .beerListItem-tap
+      position       : absolute
+      top            : -1.5rem
+      left           : -1rem
+      z-index        : 1
+      pointer-events : none
+
+
+
+  ////------------------------------------------
+  .beerListItem-tap
+    //------------------------------------------
+
+    // ----- Layout -----
+    width          : auto
+    transform      : rotate(-20deg)
+
+    // ----- Looks -----
+    font-size   : 3rem
+    font-weight : bold
+    color       : lightgrey
+
+    // ----- Content -----
+    &:before
+      content : '№'
+
+
+
+  ////------------------------------------------
+  .beerListItem-title
+    //------------------------------------------
+
+    // ----- Text -----
+    font-size : 1.5rem
+
+
+
+  ////------------------------------------------
+  .beerListItem-content
+    //------------------------------------------
+
+    // ----- Layout -----
+    +clearfix
+
+
+
+  ////------------------------------------------
+  .beerListItem-fields
+    //------------------------------------------
+
+    // ----- Layout -----
+    display         : flex
+    justify-content : flex-start
+
+    // ----- Content Layout -----
+    .beerListItem-field
+      &:not(:last-child)
+        margin-right : 1em
+
+        &:after
+          content : ','
+
+
+
+  ////------------------------------------------
+  .beerListItem-field
+    //------------------------------------------
+
+    // ----- Looks -----
+    border-bottom : 1px dotted black
+    cursor        : help
+
+
+
+  ////------------------------------------------
+  .beerListItem-field-value-icon
+    //------------------------------------------
+
+    // ----- Layout -----
+    width : 15px
+
+
+
+
+  ////------------------------------------------
+  .beerListItem-image
+    //------------------------------------------
+
+    // ----- Text -----
+    width      : 100px
+    height     : 100px
+    object-fit : contain

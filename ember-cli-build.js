@@ -5,11 +5,22 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app')
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     // Add options here
+    sassOptions: {
+      includePaths: ['app'],
+    },
+
     'ember-cli-staticboot': {
       paths: [
         '/'
-      ]
+      ],
     },
+
+    dotEnv: {
+      clientAllowedKeys: [
+        'CB_INSTAGRAM_USER_ID',
+        'CB_INSTAGRAM_ACCESS_TOKEN',
+      ],
+    }
   })
 
   // Use `app.import` to add additional libraries to the generated

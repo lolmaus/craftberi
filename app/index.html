@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script>
+      if (
+        location.protocol === 'http:'
+        && location.host === 'craftberi.ru'
+      ) {
+        location.replace('https:' + location.href.slice(5))
+      }
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Крафтбери — магазин авторского пива</title>
@@ -16,6 +25,7 @@
 
     {{content-for "head-footer"}}
   </head>
+
   <body>
     {{content-for "body"}}
 

@@ -1,0 +1,52 @@
+=beerListItem-small
+  $ss      : &
+  $gutter : 1rem
+
+  ////------------------------------------------
+  @at-root #{$ss}-image
+    //------------------------------------------
+
+    // ----- Position -----
+    float         : left
+    margin-right  : $gutter
+    margin-bottom : $gutter
+    margin-top    : 0.3rem
+
+
+
+  ////------------------------------------------
+  @at-root #{$ss}-description
+    //------------------------------------------
+
+    // ----- Position -----
+    clear : both
+
+
+
+
+=beerListItem-medium
+  $ss      : &
+  $gutter : 1rem
+
+  $image-margin-top: 0.3rem
+
+  ////------------------------------------------
+  @at-root #{$ss}-title, #{$ss}-brewery
+    //------------------------------------------
+
+    // ----- Position -----
+    display : inline
+
+
+
+  ////------------------------------------------
+  @at-root #{$ss}-image
+    //------------------------------------------
+
+    // ----- Position -----
+    float         : left
+    margin-right  : $gutter
+    margin-bottom : $gutter
+    margin-top    : $image-margin-top
+
+
