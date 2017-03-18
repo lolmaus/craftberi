@@ -1,11 +1,166 @@
 import Component from 'ember-component'
+import {filterBy} from 'ember-computed'
+import EObject from 'ember-object'
+import {next} from 'ember-runloop'
+
+import computed from 'ember-macro-helpers/computed'
+import raw from 'ember-macro-helpers/raw'
+import reads from 'ember-macro-helpers/reads'
+import collect from 'ember-awesome-macros/collect'
+import conditional from 'ember-awesome-macros/conditional'
+import equal from 'ember-awesome-macros/equal'
+import every from 'ember-awesome-macros/array/every'
+import filter from 'ember-awesome-macros/array/filter'
+import mapBy from 'ember-awesome-macros/array/map-by'
+import sort from 'ember-awesome-macros/array/sort'
+import uniq from 'ember-awesome-macros/array/uniq'
+
+import $ from 'jquery'
 
 
 
 export default Component.extend({
 
   // ----- Arguments -----
-  beers       : undefined,
-  mode        : undefined, // 'tap' or 'bottle'
-  parentClass : undefined,
+  beers               : undefined,
+  mode                : undefined, // 'tap' or 'bottle'
+  parentClass         : undefined,
+  groupByBrewery      : equal('mode', raw('bottle')),
+  initialExpandStatus : false,
+
+
+
+  // ----- Overridden properties -----
+  classNames : ['beerList'],
+
+
+
+  // ----- Static properties -----
+  _sortOptions : [
+    {path : 'tapNumber',   label : 'Кран'},
+    {path : 'name',         label : 'Наименование'},
+    {path : 'brewery.name', label : 'Пивоварня'},
+    {path : 'style',        label : 'Сорт'},
+    {path : 'ibu',          label : 'IBU', title: 'Расченая горечь'},
+    {path : 'abv',          label : 'ABV', title: 'Крепость на единицу объема'},
+    {path : 'gravity',      label : 'OG',  title: 'Начальная плотность'},
+    {path : 'priceLiter',   label : 'Цена'},
+  ],
+
+  currentSortOrder : 'asc',
+
+
+
+  // ----- Computed properties -----
+  $body: computed(() => $('body')),
+
+  groupByBreweryEffective : reads("groupByBrewery"),
+
+  sortOptions1: conditional(
+    'groupByBreweryEffective',
+    filter('_sortOptions', ({path}) => path !== 'brewery.name'),
+    '_sortOptions'
+  ),
+
+  sortOptions : conditional(
+    equal('mode', raw('bottle')),
+    filter('sortOptions1', ({path}) => path !== 'tapNumber'),
+    'sortOptions1'
+  ),
+
+  beersOnTap     : filterBy("beers", "tapNumber"),
+  beersInBottles : filterBy("beers", "bottle", "yes"),
+  beersFiltered  : conditional(equal('mode', raw('tap')), "beersOnTap", "beersInBottles"),
+
+  beersWrapped : computed(
+             'beersFiltered.[]', 'initialExpandStatus',
+    function (beersFiltered,      initialExpandStatus) {
+      return beersFiltered.map(beer => EObject.create({
+        beer,
+        brewery    : beer.get('brewery'),
+        isExpanded : initialExpandStatus,
+      }))
+    }
+  ),
+
+  currentSortOption : computed('sortOptions', 'mode', function () {
+    return this._getSortOption()
+  }),
+
+  areAllWrappersExpanded : computed(
+             'beersWrapped.@each.isExpanded',
+    function (beersWrapped) {
+      return beersWrapped.mapBy('isExpanded').every(value => value)
+    }
+  ),
+
+  areNoWrappersExpanded : computed(
+             'beersWrapped.@each.isExpanded',
+    function (beersWrapped) {
+      return beersWrapped.mapBy('isExpanded').every(value => !value)
+    }
+  ),
+
+  breweries : sort(uniq(mapBy('beersFiltered', raw('brewery'))), ['name']),
+
+  _getSortOption () {
+    const path =
+      this.get('mode') === 'tap'
+        ? 'tapNumber'
+        : 'name'
+
+    return this.get('sortOptions').findBy('path', path)
+  },
+
+  actions : {
+    toggleGroup () {
+      const newValue = this.toggleProperty('groupByBreweryEffective')
+
+      if (newValue && this.get('currentSortOption.path') === 'brewery.name') {
+        this.set('currentSortOption', this._getSortOption())
+        this.set('currentSortOrder', 'asc')
+      }
+    },
+
+    toggleSortOrder () {
+      const currentSortOrder = this.get('currentSortOrder')
+      const newSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc'
+      this.set('currentSortOrder', newSortOrder)
+    },
+
+    sort (sortOption) {
+      const currentSortOption = this.get('currentSortOption')
+
+      if (currentSortOption === sortOption) this.send('toggleSortOrder')
+      else {
+        this.set('currentSortOption', sortOption)
+        this.set('currentSortOrder', 'asc')
+      }
+    },
+
+    expandAll () {
+      this
+        .get('beersWrapped')
+        .forEach(wrapper => wrapper.set('isExpanded', true))
+    },
+
+    collapseAll () {
+      this
+        .get('beersWrapped')
+        .forEach(wrapper => wrapper.set('isExpanded', false))
+    },
+
+    goToBrewery (brewery) {
+      this.set('groupByBreweryEffective', true)
+
+      next(() => {
+        const id        = brewery.get('id')
+        const $target   = $(`._brewery-${id}`)
+        const $body     = this.get('$body')
+        const scrollTop = $target.offset().top - 100
+
+        $body.animate({scrollTop})
+      })
+    }
+  }
 })

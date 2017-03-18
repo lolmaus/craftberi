@@ -1,57 +1,54 @@
-@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+@at-root
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
-@import app/styles/helpers/position
-
-
-
-$s : &
+  @import app/styles/helpers/position
 
 
 
-////------------------------------------------
-@at-root #{$s}
-  //------------------------------------------
+  ////------------------------------------------
+  .photoFeed
+    //------------------------------------------
 
-  // ----- Content layout -----
-  .swiper-pagination
-    position : static
+    // ----- Content layout -----
+    .swiper-pagination
+      position : static
 
-  #{$s}-slide
-    margin-right : 10px
+    .photoFeed-slide
+      margin-right : 10px
 
-  &.-fastboot
-    .swiper-wrapper
-      display: flex
+    &.-fastboot
+      .swiper-wrapper
+        display: flex
 
-    #{$s}-slide
-      display     : none
-      flex-shrink : 1
-      flex-grow   : 0
-
-
-
-    @for $i from 1 through 10
-      @media (min-width: #{$i * 200px})
-        @for $k from 1 through $i
-          #{$s}-slide:nth-child(#{$k})
-            display : block
+      .photoFeed-slide
+        display     : none
+        flex-shrink : 1
+        flex-grow   : 0
 
 
 
-////------------------------------------------
-@at-root #{$s}-slide
-  //------------------------------------------
+      @for $i from 1 through 10
+        @media (min-width: #{$i * 200px})
+          @for $k from 1 through $i
+            .photoFeed-slide:nth-child(#{$k})
+              display : block
 
-  // ----- Layout -----
 
-  // ----- Content layout -----
-  #{$s}-slide-inner
-    display     : block
-    padding-top : 100%
-    height      : 0
-    position    : relative
 
-  #{$s}-image
-    +stretch
-    object-fit: cover
+  ////------------------------------------------
+  .photoFeed-slide
+    //------------------------------------------
+
+    // ----- Layout -----
+
+    // ----- Content layout -----
+    .photoFeed-slide-inner
+      display     : block
+      padding-top : 100%
+      height      : 0
+      position    : relative
+
+    .photoFeed-image
+      +stretch
+      object-fit: cover
 

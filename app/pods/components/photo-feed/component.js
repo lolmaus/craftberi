@@ -1,6 +1,8 @@
+// ----- Ember modules -----
 import Component from 'ember-component'
 import service from 'ember-service/inject'
 
+// ----- Ember addon modules -----
 import computed from 'ember-macro-helpers/computed'
 
 
@@ -18,7 +20,10 @@ export default Component.extend({
 
 
   // ----- Overridden properties -----
-  classNameBindings: ['fastboot.isFastBoot:-fastboot:-no-fastboot'],
+  classNameBindings: [
+    ':photoFeed',
+    'fastboot.isFastBoot:-fastboot:-no-fastboot',
+  ],
 
 
 

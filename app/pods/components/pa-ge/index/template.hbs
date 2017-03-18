@@ -1,6 +1,6 @@
-<div class= "{{componentCssClassName}}-section _instagram">
+<div class= 'paGe_index-section _instagram'>
 
-  <h2 class = "{{componentCssClassName}}-section-header">
+  <h2 class = 'paGe_index-section-header'>
     Наша лента Instagram
   </h2>
 
@@ -12,9 +12,9 @@
 
 
 
-<div class= "{{componentCssClassName}}-section _beer">
-  <div class= "{{componentCssClassName}}-subsection _tap">
-    <h2 class = "{{componentCssClassName}}-section-header">
+<div class= 'paGe_index-section _beer'>
+  <div class= 'paGe_index-subsection _tap'>
+    <h2 class = 'paGe_index-section-header'>
       Сегодня на кранах
     </h2>
 
@@ -22,9 +22,9 @@
       Загружаем...
     {{else if allDocumentsProxy.isFulfilled}}
       {{beer-list
-        parentClass = (concat componentCssClassName '-subsection-tap-beerList')
-        beers       = (map-by 'beer' (sort-by 'number' taps))
-        mode        = "tap"
+        parentClass = 'paGe_index-subsection-tap-beerList'
+        beers       = beers
+        mode        = 'tap'
       }}
     {{else if allDocumentsProxy.isRejected}}
       Не удалось загрузить.
@@ -32,29 +32,19 @@
     {{/if}}
   </div>{{! subsection _tap }}
 
-  <div class= "{{componentCssClassName}}-subsection _bottle">
-    <h2 class = "{{componentCssClassName}}-section-header">
+  <div class= 'paGe_index-subsection _bottle'>
+    <h2 class = 'paGe_index-section-header'>
       Сегодня в бутылках
     </h2>
 
     {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
       Загружаем...
     {{else if allDocumentsProxy.isFulfilled}}
-      {{#each (sort-by 'name' breweries) as |brewery|}}
-        {{#with (filter-by 'bottle' 'yes' (sort-by 'name' brewery.beers)) as |beers|}}
-          <div class= "{{componentCssClassName}}-subsection-bottle-group">
-            <h3 class= "{{componentCssClassName}}-subsection-bottle-title">
-              {{strip-tags brewery.name}}
-            </h3>
-
-            {{beer-list
-              parentClass = (concat componentCssClassName '-subsection-bottle-beerList')
-              beers       = beers
-              mode        = "bottle"
-            }}
-          </div>
-        {{/with}}{{! beers }}
-      {{/each}}{{! breweries }}
+      {{beer-list
+        parentClass = 'paGe_index-subsection-bottle-beerList'
+        beers       = beers
+        mode        = 'bottle'
+      }}
     {{else if allDocumentsProxy.isRejected}}
       Не удалось загрузить.
       <a href {{action 'refetch'}}>Попроовать снова</a>

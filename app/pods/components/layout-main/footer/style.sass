@@ -1,0 +1,28 @@
+@at-root
+
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+  @import app/styles/helpers/container
+  //@import app/styles/helpers/position
+
+
+
+
+
+
+  ////------------------------------------------
+  .layoutMain_footer
+    //------------------------------------------
+
+    // ----- Layout -----
+    +container
+
+    // ----- Looks -----
+    &, a
+      background-color : black
+      color            : white
+
+    // ----- RWD -----
+    +from(s)
+      display:         flex
+      justify-content: space-between

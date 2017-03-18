@@ -9,4 +9,9 @@ export default Component.extend({
   mode             : undefined, // 'tap' or 'bottle'
   parentClass      : undefined,
   grandParentClass : undefined,
+
+
+
+  // ----- Overridden properties -----
+  classNames : ['beerList_item']  ,
 })

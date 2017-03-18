@@ -1,24 +1,39 @@
-@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+@at-root
 
-@import app/styles/components/beer-list-item
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
-
-
-$s      : &
-$gutter : 2rem
+  @import app/pods/components/beer-list/item/mixins
 
 
 
-////------------------------------------------
-&
-  //------------------------------------------
+  $gutter : 2rem
 
-  // ----- RWD -----
-  @at-root #{$s}-item
-    margin-bottom : $gutter
 
-    +to(xs)
-      +beerListItem-small
 
-    +from(s)
-      +beerListItem-medium
+  ////------------------------------------------
+  .beerList
+    //------------------------------------------
+
+    // ----- RWD -----
+    .beerList-item
+      margin-bottom : $gutter
+
+      +to(xs)
+        +beerListItem-small
+
+      +from(s)
+        +beerListItem-medium
+
+
+
+  ////------------------------------------------
+  .beerList-sortOption
+    //------------------------------------------
+
+    // ----- Looks -----
+    text-decoration: none
+    border-bottom: 1px dashed blue
+
+    // ----- Behavior -----
+    &.-current
+      font-weight: bold

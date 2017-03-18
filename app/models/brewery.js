@@ -9,5 +9,5 @@ export default Model.extend({
   location : attr('string'),
   website  : attr('string'),
 
-  beers : hasMany('beer'),
+  beers : hasMany('beer', {async: false}),
 })

@@ -1,6 +1,11 @@
 {{layout-main/header
-  class = (concat componentCssClassName '-header')
+  class = 'layoutMain-header'
 }}
 
+<main class = 'layoutMain-main'>
+  {{yield}}
+</main>
 
-{{yield}}
+{{layout-main/footer
+  class = 'layoutMain-footer'
+}}

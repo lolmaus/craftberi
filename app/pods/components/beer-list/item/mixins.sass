@@ -1,9 +1,9 @@
 =beerListItem-small
-  $s      : &
+  $ss      : &
   $gutter : 1rem
 
   ////------------------------------------------
-  @at-root #{$s}-image
+  @at-root #{$ss}-image
     //------------------------------------------
 
     // ----- Position -----
@@ -15,16 +15,7 @@
 
 
   ////------------------------------------------
-  @at-root #{$s}-fields
-    //------------------------------------------
-
-    // ----- Position -----
-    margin-bottom : $gutter
-
-
-
-  ////------------------------------------------
-  @at-root #{$s}-description
+  @at-root #{$ss}-description
     //------------------------------------------
 
     // ----- Position -----
@@ -34,13 +25,13 @@
 
 
 =beerListItem-medium
-  $s      : &
+  $ss      : &
   $gutter : 1rem
 
   $image-margin-top: 0.3rem
 
   ////------------------------------------------
-  @at-root #{$s}-title, #{$s}-brewery
+  @at-root #{$ss}-title, #{$ss}-brewery
     //------------------------------------------
 
     // ----- Position -----
@@ -49,7 +40,7 @@
 
 
   ////------------------------------------------
-  @at-root #{$s}-image
+  @at-root #{$ss}-image
     //------------------------------------------
 
     // ----- Position -----
@@ -57,17 +48,5 @@
     margin-right  : $gutter
     margin-bottom : $gutter
     margin-top    : $image-margin-top
-
-
-
-  ////------------------------------------------
-  @at-root #{$s}-fields
-    //------------------------------------------
-
-    // ----- Position -----
-    float         : left
-    margin-right  : $gutter
-    margin-bottom : $gutter
-    min-height    : calc(100px + #{$image-margin-top})
 
 
