@@ -1,53 +1,63 @@
-<div class= 'paGe_index-section _instagram'>
-
-  <h2 class = 'paGe_index-section-header'>
-    Наша лента Instagram
-  </h2>
-
-  {{photo-feed
-    photos = photos
-  }}
-
-</div>{{! section _instagram }}
+{{photo-feed
+  class= 'paGe_index-section _instagram'
+  photos = photos
+}}
 
 
 
 <div class= 'paGe_index-section _beer'>
-  <div class= 'paGe_index-subsection _tap'>
-    <h2 class = 'paGe_index-section-header'>
-      Сегодня на кранах
-    </h2>
 
-    {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
-      Загружаем...
-    {{else if allDocumentsProxy.isFulfilled}}
-      {{beer-list
-        parentClass = 'paGe_index-subsection-tap-beerList'
-        beers       = beers
-        mode        = 'tap'
-      }}
-    {{else if allDocumentsProxy.isRejected}}
-      Не удалось загрузить.
-      <a href {{action 'refetch'}}>Попроовать снова</a>
-    {{/if}}
+  <div class= 'paGe_index-subsection _tap'>
+    <h2 class = 'paGe_index-subsection-title'>
+      Сегодня на кранах
+
+      {{#if (and (not fastboot.isFastBoot) allDocumentsProxy.isFulfilled)}}
+        ({{beersOnTap.length}})
+      {{/if}}
+    </h2>{{! subsection-title }}
+
+    <div class = 'paGe_index-subsection-content'>
+      {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+        Загружаем...
+      {{else if allDocumentsProxy.isFulfilled}}
+        {{beer-list
+          parentClass = 'paGe_index-subsection-tap-beerList'
+          beers       = beersOnTap
+          mode        = 'tap'
+        }}
+      {{else if allDocumentsProxy.isRejected}}
+        Не удалось загрузить.
+        <a href {{action 'refetch'}}>Попроовать снова</a>
+      {{/if}}
+    </div>{{! subsection-content }}
   </div>{{! subsection _tap }}
 
-  <div class= 'paGe_index-subsection _bottle'>
-    <h2 class = 'paGe_index-section-header'>
-      Сегодня в бутылках
-    </h2>
 
-    {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
-      Загружаем...
-    {{else if allDocumentsProxy.isFulfilled}}
-      {{beer-list
-        parentClass = 'paGe_index-subsection-bottle-beerList'
-        beers       = beers
-        mode        = 'bottle'
-      }}
-    {{else if allDocumentsProxy.isRejected}}
-      Не удалось загрузить.
-      <a href {{action 'refetch'}}>Попроовать снова</a>
-    {{/if}}
+
+
+  <div class= 'paGe_index-subsection _bottle'>
+    <h2 class = 'paGe_index-subsection-title'>
+      Сегодня в бутылках
+
+      {{#if (and (not fastboot.isFastBoot) allDocumentsProxy.isFulfilled)}}
+        ({{beersInBottles.length}})
+      {{/if}}
+    </h2>{{! subsection-title }}
+
+    <div class = 'paGe_index-subsection-content'>
+      {{#if (or fastboot.isFastBoot allDocumentsProxy.isPending)}}
+        Загружаем...
+      {{else if allDocumentsProxy.isFulfilled}}
+        {{beer-list
+          parentClass = 'paGe_index-subsection-bottle-beerList'
+          beers       = beersInBottles
+          mode        = 'bottle'
+        }}
+      {{else if allDocumentsProxy.isRejected}}
+        Не удалось загрузить.
+        <a href {{action 'refetch'}}>Попроовать снова</a>
+      {{/if}}
+    </div>{{! subsection-content }}
   </div>{{! subsection _bottle }}
+
 </div>{{!section _beer}}

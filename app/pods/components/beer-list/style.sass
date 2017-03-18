@@ -2,7 +2,7 @@
 
   @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
-  @import app/pods/components/beer-list/item/mixins
+  //@import app/pods/components/beer-list/item/mixins
 
 
 
@@ -18,11 +18,23 @@
     .beerList-item
       margin-bottom : $gutter
 
-      +to(xs)
-        +beerListItem-small
 
-      +from(s)
-        +beerListItem-medium
+
+  ////------------------------------------------
+  .beerList-sortOptions
+    //------------------------------------------
+
+    // ----- RWD -----
+    +to(xs)
+      .beerList-sortOption
+        display: table
+
+    +from(s)
+      .beerList-sortOption
+        display: inline-block
+        &:not(:last-child)
+          margin-right: 0.5em
+
 
 
 

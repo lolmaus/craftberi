@@ -1,1 +1,28 @@
 @at-root
+
+  @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+
+
+  ////------------------------------------------
+  .layoutMain
+    //------------------------------------------
+
+    // ----- RWD -----
+    +from(xxl)
+      $sidebar-width: 300px
+
+      .layoutMain-header, .layoutMain-footer
+        position : fixed
+        width    : $sidebar-width
+        left     : 0
+
+      .layoutMain-header
+        top    : 0
+        height : 100vh
+
+      .layoutMain-footer
+        bottom : 0
+
+      .layoutMain-content
+        margin-left : $sidebar-width

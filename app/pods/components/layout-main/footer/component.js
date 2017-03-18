@@ -5,7 +5,7 @@ import Component from 'ember-component'
 export default Component.extend({
 
   // ----- Overridden properties -----
-  classNames: ['layoutMain_footer'],
-  tagName: 'header',
+  classNames : ['layoutMain_footer'],
+  tagName    : 'footer',
 
 })

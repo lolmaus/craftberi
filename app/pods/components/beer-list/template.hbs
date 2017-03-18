@@ -1,61 +1,66 @@
-<div>
-  <div>
-    <span>
-      Сортировка:
-    </span>
+<div class = 'beerList-controls'>
 
+  <div class = 'beerList-sortOptions'>
     {{#each sortOptions as |sortOption|}}
-      <span>
-        <a
-          href
-          class = "
-            beerList-sortOption
-            {{if (eq sortOption currentSortOption) '-current' '-not-current'}}
-          "
-          title = {{sortOption.title}}
-          {{action 'sort' sortOption}}
-        >
+      <a
+        href
+        class = '
+          beerList-sortOption
+          {{if (eq sortOption currentSortOption) '-current' '-not-current'}}
+        '
+        title = {{sortOption.title}}
+        {{action 'sort' sortOption}}
+      >
+        <span class = 'beerList-sortOption-label'>
           {{~sortOption.label~}}
-        </a>
+        </span>{{! sortOption-label }}
 
         {{~concat~}}
 
         {{#if (eq sortOption currentSortOption)~}}
-          <span>
+          <span class = 'beerList-sortOption-direction'>
             {{~if (eq currentSortOrder 'asc') '▼' '▲'~}}
-          </span>
+          </span>{{! sortOption-direction }}
         {{/if}}
-      </span>
-    {{/each}}
-  </div>
+      </a>{{! sortOption }}
+    {{/each}}{{! sortOptions }}
+  </div>{{! sortOptions }}
 
-  <div>
-    <label>
+
+
+
+  <div class = 'beerList-options'>
+
+    <label class = 'beerList-option _group'>
       {{one-way-checkbox
+        class   = 'beerList-option-checkbox'
         checked = groupByBreweryEffective
         update  = (action 'toggleGroup')
       }}
 
-      <span>
+      <span class   = 'beerList-option-label'>
         Группировать по пивоварням
-      </span>
-    </label>
+      </span>{{! option-label }}
+    </label>{{! option _group}}
 
-    {{#unless areNoWrappersExpanded}}
-      <a
-        href
-        {{action 'collapseAll'}}
-      >Свернуть всё</a>
-    {{/unless}}
+    <label class = 'beerList-option _group'>
+      {{one-way-checkbox
+        class   = 'beerList-option-checkbox'
+        checked = groupByBreweryEffective
+        update  = (action 'toggleIsExpanded')
+      }}
 
-    {{#unless areAllWrappersExpanded}}
-      <a
-        href
-        {{action 'expandAll'}}
-      >Развернуть всё</a>
-    {{/unless}}
-  </div>
-</div>
+      <span class   = 'beerList-option-label'>
+        Подробно
+      </span>{{! option-label }}
+    </label>{{! option _group}}
+
+  </div>{{! options }}
+
+</div>{{! controls }}
+
+
+
 
 <div>
   {{#if groupByBreweryEffective}}
@@ -76,7 +81,7 @@
       {{#each breweries as |brewery|}}
         <div>
           <h3
-            class = "beerList-brewery-title _brewery-{{brewery.id}}"
+            class = 'beerList-brewery-title _brewery-{{brewery.id}}'
 
           >
             {{strip-tags brewery.name}}
@@ -88,7 +93,7 @@
                   (concat 'beer.' currentSortOption.path ':' currentSortOrder)
                   (filter-by 'brewery' brewery beersWrapped)
                 )
-              key = "beer.id"
+              key = 'beer.id'
               as |beerWrapper|
             }}
               {{beer-list/item
@@ -111,7 +116,7 @@
           (concat 'beer.' currentSortOption.path ':' currentSortOrder)
           beersWrapped
         )
-        key = "beer.id"
+        key = 'beer.id'
         as |beerWrapper|
       }}
         {{beer-list/item

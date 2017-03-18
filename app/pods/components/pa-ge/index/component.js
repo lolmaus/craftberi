@@ -37,11 +37,12 @@ export default Component.extend({
     return PromiseObject.create({promise})
   }),
 
-  allDocuments : reads('allDocumentsProxy.content'),
-  taps         : filterBy('allDocuments', 'type', 'tap'),
-  beers        : filterBy('allDocuments', 'type', 'beer'),
-  breweries    : filterBy('allDocuments', 'type', 'brewery'),
-
+  allDocuments   : reads('allDocumentsProxy.content'),
+  taps           : filterBy('allDocuments', 'type', 'tap'),
+  beers          : filterBy('allDocuments', 'type', 'beer'),
+  breweries      : filterBy('allDocuments', 'type', 'brewery'),
+  beersOnTap     : filterBy("beers", "tapNumber"),
+  beersInBottles : filterBy("beers", "bottle", "yes"),
 
 
   // ----- Methods -----

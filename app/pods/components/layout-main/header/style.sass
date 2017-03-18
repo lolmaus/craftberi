@@ -2,8 +2,10 @@
 
   @import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
 
-  @import app/styles/helpers/container
-  @import app/styles/helpers/position
+  @import app/styles/helpers/utility/container
+  @import app/styles/helpers/utility/position
+
+  @import app/styles/helpers/looks/fonts
 
 
 
@@ -13,6 +15,9 @@
   ////------------------------------------------
   .layoutMain_header
     //------------------------------------------
+
+    // ----- Text -----
+    text-shadow : 0 0 3px black, 0 0 5px black, 0 0 7px black,  0 0 10px black
 
     // ----- Blurry background -----
     position : relative
@@ -47,72 +52,90 @@
     +container
 
 
-
     // ----- Looks -----
 
     // ----- RWD -----
     +to(xs)
-      padding-top    : 10%
-      padding-bottom : 10%
+      text-align: center
 
       .layoutMain_header-image
-        padding-left  : 20%
-        padding-right : 20%
-        margin-bottom : 10%
-
-      .layoutMain_header-text
-        text-align : center
+        width         : 70%
+        margin-bottom : config-get('cb.layout.container.padding')
 
       .layoutMain_header-title
-        font-size : 2.5rem
+        margin-bottom : config-get('cb.layout.container.padding')
 
-      .layoutMain_header-subtitle
-        font-size  : 1.2rem
-        margin-top : 0.5rem
+      .layoutMain_header-title-title
+        font-size : 2rem
 
-    +from(s)
-      display         : flex
-      justify-content : center
-      align-items     : center
-      padding         : 10%
-
-      .layoutMain_header-image
-        width        : 200px
-        flex-grow    : 0
-        margin-right : 5%
-
-      .layoutMain_header-text
-        flex-grow : 0
-
-      .layoutMain_header-title
+    +at(xs)
+      .layoutMain_header-title-title
         font-size : 3.5rem
 
-      .layoutMain_header-subtitle
-        font-size  : 1.5rem
-        margin-top : 0.5rem
+      .layoutMain_header-title-subtitle
+        font-size : 1.5rem
 
-    +from(m)
+    +between(s, xl)
+      padding-top    : 5rem
+      padding-bottom : 7rem
+      padding-left   : 15%
+      padding-right  : 15%
+
       .layoutMain_header-image
-        width : 300px
+        width         : 200px
+        margin-bottom : config-get('cb.layout.container.padding')
 
       .layoutMain_header-title
-        font-size : 4.5rem
+        margin-bottom : config-get('cb.layout.container.padding')
 
-      .layoutMain_header-subtitle
-        font-size  : 2rem
-        margin-top : 1rem
+      .layoutMain_header-title-title
+        font-size : 3.5rem
+
+      .layoutMain_header-title-subtitle
+        font-size : 1.5rem
+
+      .layoutMain_header-mission
+        max-width : 500px
+
+    +from(xxl)
+      text-align: center
+
+      .layoutMain_header-image
+        width         : 70%
+        margin-bottom : config-get('cb.layout.container.padding')
+
+      .layoutMain_header-title
+        margin-bottom : config-get('cb.layout.container.padding')
+
+      .layoutMain_header-title-title
+        font-size : 2rem
+
+    @media (min-width: #{left-bp-of-slice(xxl)}) and (max-height: 650px)
+      .layoutMain_header-mission
+        display: none
+
+
+
+
 
   ////------------------------------------------
   .layoutMain_header-text
     //------------------------------------------
 
     // ----- Looks -----
-    text-shadow : 0 0 3px black, 0 0 5px black, 0 0 7px black,  0 0 10px black
+
+
+  ////------------------------------------------
+  .layoutMain_header-title-title
+    //------------------------------------------
+
+    // ----- Looks -----
+    +heading
 
 
 
   ////------------------------------------------
-  .layoutMain_header-subtitle
+  .layoutMain_header-title-subtitle
     //------------------------------------------
 
     // ----- Looks -----

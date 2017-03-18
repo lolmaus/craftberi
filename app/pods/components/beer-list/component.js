@@ -68,14 +68,10 @@ export default Component.extend({
     'sortOptions1'
   ),
 
-  beersOnTap     : filterBy("beers", "tapNumber"),
-  beersInBottles : filterBy("beers", "bottle", "yes"),
-  beersFiltered  : conditional(equal('mode', raw('tap')), "beersOnTap", "beersInBottles"),
-
   beersWrapped : computed(
-             'beersFiltered.[]', 'initialExpandStatus',
-    function (beersFiltered,      initialExpandStatus) {
-      return beersFiltered.map(beer => EObject.create({
+             'beers.[]', 'initialExpandStatus',
+    function (beers,      initialExpandStatus) {
+      return beers.map(beer => EObject.create({
         beer,
         brewery    : beer.get('brewery'),
         isExpanded : initialExpandStatus,
@@ -101,7 +97,7 @@ export default Component.extend({
     }
   ),
 
-  breweries : sort(uniq(mapBy('beersFiltered', raw('brewery'))), ['name']),
+  breweries : sort(uniq(mapBy('beers', raw('brewery'))), ['name']),
 
   _getSortOption () {
     const path =
