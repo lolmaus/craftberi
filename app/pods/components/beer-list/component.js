@@ -1,8 +1,9 @@
 // ----- Ember modules -----
 import Component from 'ember-component'
 import EObject from 'ember-object'
-import Evented from 'ember-evented'
-import {next} from 'ember-runloop'
+import on from 'ember-evented/on'
+import {next, later} from 'ember-runloop'
+import service from 'ember-service/inject'
 
 // ----- Ember addons -----
 import computed from 'ember-macro-helpers/computed'
@@ -21,7 +22,6 @@ import EEQMixin from 'ember-element-query/mixin'
 import $ from 'jquery'
 
 // ----- Custom classes -----
-const EventedObject = EObject.extend(Evented)
 
 
 
@@ -33,6 +33,11 @@ export default Component.extend(EEQMixin, {
   parentClass         : undefined,
   groupByBrewery      : equal('mode', raw('bottle')),
   initialExpandStatus : false,
+
+
+
+  // ----- Services -----
+  eqService: service('eq'),
 
 
 
@@ -58,7 +63,11 @@ export default Component.extend(EEQMixin, {
 
 
   // ----- Computed properties -----
-  $body: computed(() => $('body')),
+  $body:     computed(() => $('body')),
+
+  $controls: computed(function () {
+    return this.$('.beerList-controls')
+  }),
 
   groupByBreweryEffective : reads("groupByBrewery"),
 
@@ -115,6 +124,7 @@ export default Component.extend(EEQMixin, {
 
   breweries : sort(uniq(mapBy('beers', raw('brewery'))), ['name']),
 
+  // ----- Private methods -----
   _getSortOption () {
     const path =
       this.get('mode') === 'tap'
@@ -124,6 +134,28 @@ export default Component.extend(EEQMixin, {
     return this.get('sortOptions').findBy('path', path)
   },
 
+
+
+  // ----- Events and observers -----
+  // _applySticky: on('didInsertElement', function () {
+  //   const $controls = this.get('$controls')
+  //
+  //   $controls.stick_in_parent({
+  //     offset_top: 50
+  //   })
+  //
+  //   this
+  //     .get('eqService')
+  //     .on('afterUpdate', () => {
+  //       console.log('afterUpdate')
+  //
+  //       $controls.trigger('sticky_kit:recalc')
+  //     })
+  // }),
+
+
+
+  // ----- Actions -----
   actions : {
     toggleGroup () {
       const newValue = this.toggleProperty('groupByBreweryEffective')
@@ -156,6 +188,12 @@ export default Component.extend(EEQMixin, {
       this
         .get('beersWrapped')
         .forEach(wrapper => wrapper.set('isExpanded', value))
+
+      later(() => {
+        this
+          .get('$controls')
+          .trigger('sticky_kit:recalc')
+      }, 1000)
     },
 
     goToBrewery (brewery) {

@@ -20,6 +20,13 @@
     overflow : hidden
 
     // ----- RWD -----
+    +eq-to(s)
+      .beerList-controls
+        position: static !important
+
+      > div:not(.beerList-beers):not(.beerList-controls)
+        display: none !important
+
     +eq-from(m)
       $sidebar-width : 200px
       display     : flex
@@ -32,8 +39,8 @@
         flex-shrink : 0
 
       .beerList-beers
-        flex-grow   : 1
-        flex-shrink : 0
+        flex-grow   : 0
+        flex-shrink : 1
 
 
 
@@ -113,6 +120,10 @@
     .beerList-beers-beers-group
       &:not(:last-child)
         margin-bottom: 3rem
+
+    .beerList-item
+      &:not(:last-child)
+        margin-bottom: 2rem
 
 
 

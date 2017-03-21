@@ -1,38 +1,48 @@
 <div class = "beerListItem-main">
-  <div class = "beerListItem-titleAndBrewery">
-    {{#if (and (eq mode 'tap') beer.tapNumber)}}
-      <div class = "beerListItem-tap">
-        {{strip-tags beer.tapNumber}}
-      </div>
-    {{/if}}{{! beer.tapNumber }}
-
-    <h3
-      class = "beerListItem-title"
+  {{#if beer.image.main}}
+    <img
+      class  = "beerListItem-image"
+      src    = {{beer.image.main.url}}
+      width  = {{beer.image.main.dimensions.width}}
+      height = {{beer.image.main.dimensions.height}}
+      alt    = {{or beer.image.main.alt (concat (strip-tags beer.name) ' от ' (strip-tags beer.brewery.name))}}
     >
-      <a
-        href
-        class = "beerListItem-title-link"
-        {{action 'toggleIsExpanded'}}
+  {{/if}}{{! beer.image.main }}
+
+  <div class = "beerListItem-main-content">
+    <div class = "beerListItem-titleAndBrewery">
+      {{#if (and (eq mode 'tap') beer.tapNumber)}}
+        <div class = "beerListItem-tap">
+          {{strip-tags beer.tapNumber}}
+        </div>
+      {{/if}}{{! beer.tapNumber }}
+
+      <h3
+        class = "beerListItem-title"
       >
-        {{strip-tags beer.name}}
-      </a>
-    </h3>
-
-    <div class = "beerListItem-brewery">
-      {{#if beer.brewery.name}}
-        от
         <a
-          href = {{beer.brewery.website}}
-        >{{strip-tags beer.brewery.name}}</a>
+          href
+          class = "beerListItem-title-link"
+          {{action 'toggleIsExpanded'}}
+        >
+          {{strip-tags beer.name}}
+        </a>
+      </h3>
 
-        {{#if beer.brewery.location}}
-          ({{strip-tags beer.brewery.location}})
-        {{/if}}
-      {{/if}}{{! brewery.name }}
-    </div>{{! brewery }}
-  </div>{{! titleAndBrewery }}
+      <div class = "beerListItem-brewery">
+        {{#if beer.brewery.name}}
+          от
+          <a
+            href = {{beer.brewery.website}}
+          >{{strip-tags beer.brewery.name}}</a>
 
-  <div class = "beerListItem-fieldsAndToggler">
+          {{#if beer.brewery.location}}
+            ({{strip-tags beer.brewery.location}})
+          {{/if}}
+        {{/if}}{{! brewery.name }}
+      </div>{{! brewery }}
+    </div>{{! titleAndBrewery }}
+
     <div class = "beerListItem-fields">
       {{#if beer.style}}
         <div
@@ -120,24 +130,11 @@
         {{/if}}{{! priceBottle }}
       {{/if}}{{! mode }}
     </div>{{! fields }}
-
-    <div class = "beerListItem-toggler">
-    </div>
-  </div>{{! toggler }}
+  </div>{{! main-content }}
 </div>{{!main}}
 
 {{#liquid-if isExpanded}}
   <div class = "beerListItem-content">
-    {{#if beer.image.main}}
-      <img
-        class  = "beerListItem-image"
-        src    = {{beer.image.main.url}}
-        width  = {{beer.image.main.dimensions.width}}
-        height = {{beer.image.main.dimensions.height}}
-        alt    = {{or beer.image.main.alt (concat (strip-tags beer.name) ' от ' (strip-tags beer.brewery.name))}}
-      >
-    {{/if}}{{! beer.image.main }}
-
     {{{beer.description}}}
   </div>{{! content }}
 {{/liquid-if}}

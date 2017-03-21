@@ -16,30 +16,56 @@
 
 
   ////------------------------------------------
+  .beerListItem-main
+    //------------------------------------------
+
+    // ----- Layout -----
+    display   : flex
+
+    // ----- Content layout  -----
+    .beerListItem-image
+      flex-shrink : 0
+      flex-grow   : 0
+
+      $size  : 50px
+      width  : $size
+      height : $size
+
+      margin-top    : 0.5em
+      margin-right  : 1em
+      margin-bottom : 1em
+
+    .beerListItem-main-content
+      flex-shrink : 1
+      flex-grow   : 0
+
+
+
+  ////------------------------------------------
   .beerListItem-titleAndBrewery
     //------------------------------------------
 
-    // ----- Looks -----
+    // ----- Layout -----
+    display     : flex
+    flex-wrap   : wrap
+    align-items : baseline
 
     // ----- Content layout -----
     > *
+      flex-shrink  : 1
+      flex-grow    : 0
+
       position : relative
       z-index  : 2
+
+      &:not(:last-child)
+        margin-right : 0.5rem
 
 
 
   ////------------------------------------------
   .beerListItem-tap
     //------------------------------------------
-
-    // ----- Layout -----
-    width          : auto
-    //transform      : rotate(-20deg)
-
-    // ----- Looks -----
-    font-size   : 3rem
-    font-weight : bold
-    color       : lightgrey
 
     // ----- Content -----
     &:before
@@ -80,8 +106,9 @@
     //------------------------------------------
 
     // ----- Layout -----
-    display         : flex
-    justify-content : flex-start
+    display     : flex
+    flex-wrap   : wrap
+    align-items : baseline
 
     // ----- Content Layout -----
     .beerListItem-field
@@ -117,7 +144,13 @@
   .beerListItem-image
     //------------------------------------------
 
-    // ----- Text -----
+    // ----- Layout -----
     width      : 100px
     height     : 100px
-    object-fit : contain
+
+    // ----- Looks -----
+    object-fit    : cover
+    border-radius : 50%
+
+
+
