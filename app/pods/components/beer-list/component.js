@@ -137,21 +137,11 @@ export default Component.extend(EEQMixin, {
 
 
   // ----- Events and observers -----
-  // _applySticky: on('didInsertElement', function () {
-  //   const $controls = this.get('$controls')
-  //
-  //   $controls.stick_in_parent({
-  //     offset_top: 50
-  //   })
-  //
-  //   this
-  //     .get('eqService')
-  //     .on('afterUpdate', () => {
-  //       console.log('afterUpdate')
-  //
-  //       $controls.trigger('sticky_kit:recalc')
-  //     })
-  // }),
+  _triggerResize: on('didInsertElement', function () {
+    this
+      .get('eqService')
+      .trigger('fooResize')
+  }),
 
 
 

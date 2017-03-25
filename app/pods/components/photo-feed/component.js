@@ -1,6 +1,7 @@
 // ----- Ember modules -----
 import Component from 'ember-component'
 import service from 'ember-service/inject'
+import on from 'ember-evented/on'
 
 // ----- Ember addon modules -----
 import computed from 'ember-macro-helpers/computed'
@@ -15,7 +16,8 @@ export default Component.extend({
 
 
   // ----- Services -----
-  fastboot: service(),
+  fastboot : service(),
+  eq       : service(),
 
 
 
@@ -24,6 +26,11 @@ export default Component.extend({
     ':photoFeed',
     'fastboot.isFastBoot:-fastboot:-no-fastboot',
   ],
+
+
+
+  // ----- Static properties -----
+  swiper: undefined,
 
 
 
@@ -36,5 +43,16 @@ export default Component.extend({
         result[i * 200] = {slidesPerView: i}
         return result
       }, {})
+  }),
+
+
+
+  // ----- Eventes and observers -----
+  subscribeToResizeUpdates: on('didInsertElement', function () {
+    this
+      .get('eq')
+      .on('fooResize', () => {
+        this.get('swiper').forceUpdate()
+      })
   })
 })
