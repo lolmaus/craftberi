@@ -68,10 +68,13 @@
         <div class = 'beerList-brewery'>
           <a
             href
+            class = 'beerList-brewery-link'
             {{action 'goToBrewery' brewery}}
           >
-            {{strip-tags brewery.name}}
+            {{~strip-tags brewery.name~}}
           </a>
+
+          ({{get (filter-by 'brewery' brewery beersWrapped) 'length'}})
         </div>{{! brewery}}
       {{/each}}{{! breweries }}
     </div>{{! breweries }}
