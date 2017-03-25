@@ -1,7 +1,7 @@
 // ----- Official Ember modules -----
 import Component from 'ember-component'
 import on from 'ember-evented/on'
-import {next} from 'ember-runloop'
+import {throttle} from 'ember-runloop'
 
 // ----- Ember addon modules -----
 import EEQMixin from 'ember-element-query/mixin'
@@ -86,7 +86,7 @@ export default Component.extend(EEQMixin, {
     this
       .get('$window')
       .on("scroll resize", () => {
-        next(this, this._reposition)
+        throttle(this, this._reposition, 100, false)
       })
   })
 
