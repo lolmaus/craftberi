@@ -1,0 +1,45 @@
+{
+  "dependencies": {},
+  "fastboot": {
+    "moduleWhitelist": [],
+    "schemaVersion": 2,
+    "manifest": {
+      "appFiles": [
+        "fastboot/craftberi.js"
+      ],
+      "vendorFiles": [
+        "fastboot/vendor.js"
+      ],
+      "htmlFile": "index.html"
+    },
+    "appConfig": {
+      "modulePrefix": "craftberi",
+      "podModulePrefix": "craftberi/pods",
+      "environment": "development",
+      "rootURL": "/",
+      "locationType": "auto",
+      "EmberENV": {
+        "FEATURES": {},
+        "EXTEND_PROTOTYPES": {
+          "Date": false
+        }
+      },
+      "APP": {
+        "instagram": {
+          "userId": "2957598815",
+          "token": "2957598815.3c41788.b8d81c5446eb4cb19d620fc5bf91ac81"
+        },
+        "name": "craftberi",
+        "version": "0.0.0+b09212d2",
+        "autoboot": false
+      },
+      "prismic": {
+        "apiURL": "https://craftberi.prismic.io/api"
+      },
+      "CB_INSTAGRAM_USER_ID": "2957598815",
+      "CB_INSTAGRAM_ACCESS_TOKEN": "2957598815.3c41788.b8d81c5446eb4cb19d620fc5bf91ac81",
+      "staticBoot": {},
+      "exportApplicationGlobal": true
+    }
+  }
+}
