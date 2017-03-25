@@ -12,7 +12,7 @@ export default Component.extend({
 
 
   // ----- Overridden properties -----
-  classNames : ['beerList_item'],
+  classNames : ['beerListItem'],
   classNameBindings : ['isExpanded:-isExpanded:-isCollapsed'],
 
 
