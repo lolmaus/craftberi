@@ -1,0 +1,31 @@
+@at-root
+  //@import node_modules/breakpoint-slicer/stylesheets/breakpoint-slicer
+
+  //@import app/styles/helpers/utility/container
+  //@import app/styles/helpers/utility/position
+
+
+
+  ////------------------------------------------
+  .yandexMap
+    //------------------------------------------
+
+    // ----- Layout -----
+    position : relative
+    height   : 450px
+    overflow : hidden
+
+    // ----- Content layout -----
+    .yandexMap-static
+      display   : block
+      position  : absolute
+      top       : 0
+      left      : 50%
+      width     : 600px
+      transform : translate(-50%, 0)
+
+
+    .yandexMap-static-image
+      display      : block
+      width        : 600px
+      height       : 450px
