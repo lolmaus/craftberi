@@ -1,6 +1,5 @@
-{{#e-q
+{{#eq-sticky
   class  = 'beerList-controls'
-  top    = 0
 }}
 
   <div class = 'beerList-sortOptions'>
@@ -78,7 +77,7 @@
     </div>{{! breweries }}
   {{/liquid-if}}{{! groupByBreweryEffective }}
 
-{{/e-q}}{{! controls }}
+{{/eq-sticky}}{{! controls }}
 
 
 
@@ -89,31 +88,36 @@
     <div class = "beerList-beers-beers">
       {{#each breweries as |brewery|}}
         <div class = "beerList-beers-beers-group">
-          <h3
-            class = 'beerList-beers-beers-group-title _brewery-{{brewery.id}}'
-
-          >
-            {{strip-tags brewery.name}}
-          </h3>
-
-          <div>
-            {{#each
+          {{#with
                 (sort-by
                   (concat 'beer.' currentSortOption.path ':' currentSortOrder)
                   (filter-by 'brewery' brewery beersWrapped)
                 )
-              key = 'beer.id'
-              as |beerWrapper|
-            }}
-              {{beer-list/item
-                class            = 'beerList-item'
-                beer             = beerWrapper.beer
-                isExpanded       = beerWrapper.isExpanded
-                mode             = mode
+                as |beers|
+          }}
+            <h3
+              class = 'beerList-beers-beers-group-title _brewery-{{brewery.id}}'
+            >
+              {{strip-tags brewery.name}}
+              ({{beers.length}})
+            </h3>
+
+            <div class = "beerList-beers-beers-group-content">
+              {{#each
+                beers
+                key = 'beer.id'
+                as |beerWrapper|
               }}
-            {{/each}}
-          </div>
-        </div>
+                {{beer-list/item
+                  class            = 'beerList-item'
+                  beer             = beerWrapper.beer
+                  isExpanded       = beerWrapper.isExpanded
+                  mode             = mode
+                }}
+              {{/each}}
+            </div>{{! beers-beers-group-content }}
+          {{/with}}
+        </div>{{! beers-beers-group }}
       {{/each}}
     </div>{{! beers-beers }}
 

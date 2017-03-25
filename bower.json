@@ -1,7 +1,6 @@
 {
   "name": "craftberi",
   "dependencies": {
-    "swiper": "~3.4.1",
-    "sticky-kit": "leafo/sticky-kit#fc5200cb5d4bc8bd330dacd578e107f395f13d62"
+    "swiper": "~3.4.1"
   }
 }

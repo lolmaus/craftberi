@@ -36,10 +36,5 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  // if (!process.env.EMBER_CLI_FASTBOOT) app.import('bower_components/sticky-kit/jquery.sticky-kit.js')
-
-  // https://github.com/leafo/sticky-kit/issues/220
-  if (!process.env.EMBER_CLI_FASTBOOT) app.import('bower_components/sticky-kit/sticky-kit.js')
-
   return app.toTree()
 }
