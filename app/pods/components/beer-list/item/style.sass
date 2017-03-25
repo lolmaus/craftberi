@@ -10,8 +10,11 @@
 
     // ----- Layout -----
     position : relative
+    +clearfix
 
     // ----- Content layout -----
+    .liquid-container, .liquid-child
+      overflow : visible
 
 
 
@@ -20,16 +23,22 @@
     //------------------------------------------
 
     // ----- Layout -----
-    display   : flex
+    //display   : flex
 
     // ----- Content layout  -----
     .beerListItem-image
-      flex-shrink : 0
-      flex-grow   : 0
+      //flex-shrink : 0
+      //flex-grow   : 0
+      float : left
 
       $size  : 50px
       width  : $size
       height : $size
+
+      object-fit    : cover
+      border-radius : 50%
+
+      transition : width 0.5s ease, height 0.5s ease, border-radius 0.5s ease
 
       margin-top    : 0.5em
       margin-right  : 1em
@@ -37,9 +46,15 @@
       .beerListItem.-isExpanded &
         margin-bottom : 1rem
 
-    .beerListItem-main-content
-      flex-shrink : 1
-      flex-grow   : 0
+    //.beerListItem-main-content
+      //flex-shrink : 1
+      //flex-grow   : 0
+
+    .beerListItem.-isExpanded & .beerListItem-image
+      width         : 200px
+      height        : auto
+      border-radius : 0
+
 
 
 
@@ -99,7 +114,6 @@
     //------------------------------------------
 
     // ----- Layout -----
-    +clearfix
 
 
 
@@ -147,12 +161,7 @@
     //------------------------------------------
 
     // ----- Layout -----
-    width      : 100px
-    height     : 100px
-
-    // ----- Looks -----
-    object-fit    : cover
-    border-radius : 50%
+    cursor        : pointer
 
 
 

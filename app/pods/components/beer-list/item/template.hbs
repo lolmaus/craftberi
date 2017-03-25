@@ -6,6 +6,7 @@
       width  = {{beer.image.main.dimensions.width}}
       height = {{beer.image.main.dimensions.height}}
       alt    = {{or beer.image.main.alt (concat (strip-tags beer.name) ' от ' (strip-tags beer.brewery.name))}}
+      {{action 'toggleIsExpanded'}}
     >
   {{/if}}{{! beer.image.main }}
 
