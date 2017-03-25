@@ -188,12 +188,6 @@ export default Component.extend(EEQMixin, {
       this
         .get('beersWrapped')
         .forEach(wrapper => wrapper.set('isExpanded', value))
-
-      later(() => {
-        this
-          .get('$controls')
-          .trigger('sticky_kit:recalc')
-      }, 1000)
     },
 
     goToBrewery (brewery) {

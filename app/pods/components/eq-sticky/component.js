@@ -80,12 +80,12 @@ export default Component.extend(EEQMixin, {
 
 
 
-  _applyRepositionOnStartAndResize: on('didInsertElement', function () {
+  _applyRepositionOnStartScrollAndResize: on('didInsertElement', function () {
     this._reposition()
 
     this
       .get('$window')
-      .scroll(() => {
+      .on("scroll resize", () => {
         next(this, this._reposition)
       })
   })
